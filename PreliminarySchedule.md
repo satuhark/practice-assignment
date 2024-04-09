@@ -21,10 +21,10 @@
 - Implement input validation to ensure data integrity.
 - Handle form submission and data processing.
 
-### Session 5: Integrate form components with state management
+**Session 5: Integrate form components with state management**
 - Implement error handling for form submissions.
 
-### Session 6: Test form functionality and user interactions.
+**Session 6: Test form functionality and user interactions.**
 - Refine user interface based on feedback.
 
 ### Sessions 7-9 (Frontend - Task Display):
