@@ -1,15 +1,8 @@
-### Link to the app
+# React + Vite
 
-### Short description of the app
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-### User guide
+Currently, two official plugins are available:
 
-### Hour logging
- 
-**Practice assignment / Satu Härkönen**
-
-| Date | Hours | What was done |
-|----------|----------|----------|
-| 09.04.2024 | 3 | Created the project idea. Wrote a project plan. Created [Github repository](https://github.com/satuhark/practice-assignment) Started a React app |
-| Rivi 2, 1 | Rivi 2, 2 | Rivi 2, 3 |
-| Rivi 3, 1 | Rivi 3, 2 | Rivi 3, 3 |
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
