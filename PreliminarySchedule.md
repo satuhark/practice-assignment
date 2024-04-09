@@ -7,13 +7,14 @@
 - Choose methods
 
 ### Sessions 2-3 (Frontend - React Setup):
-**Session 2: Set up development environment for React.**
-- Install necessary dependencies and libraries.
+**Session 2:** 
+- Set up development environment for React.
 - Configure project structure and file organization.
 - Set up version control using Git and establish a repository.
 - Create initial React components for layout and routing.
 
-**Session 3: Implement basic styling and layout using CSS or a CSS framework.**
+**Session 3:**
+- Implement basic styling and layout using CSS or a CSS framework.
 - Design user interface components for task management features.
 
 ### Sessions 4-6 (Frontend - Adding New Tasks):
