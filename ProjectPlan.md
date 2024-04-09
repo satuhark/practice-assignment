@@ -24,7 +24,7 @@ This document outlines the project's goals and technologies, including React for
 
 ### Backend Development (Node.js)
 **RESTful API:**
-- RESTful API to facilitates retrieval, addition, update, and deletion of task data
+- RESTful API facilitates retrieval, addition, update, and deletion of task data
 
 **Database Operations:**
 - Data is saved to MongoDB database
