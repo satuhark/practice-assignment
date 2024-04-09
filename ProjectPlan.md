@@ -4,8 +4,8 @@
 
 This document outlines the project's goals and technologies, including React for frontend and Node.js for backend.
 
-**Frontend (React)**
-Adding New Tasks:
+#### Frontend (React)
+**Adding New Tasks:**
 - User can add new tasks by using a form
 - Data is saved to database
 - User must provide necessary information: Name, Description, Deadline and Status
