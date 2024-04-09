@@ -1,10 +1,10 @@
 ## Project Plan: Task Management Application
 
-#### Introduction
+### Introduction
 
 This document outlines the project's goals and technologies, including React for frontend and Node.js for backend.
 
-#### Frontend (React)
+### Frontend (React)
 **Adding New Tasks:**
 - User can add new tasks by using a form
 - Data is saved to database
@@ -23,7 +23,7 @@ This document outlines the project's goals and technologies, including React for
 - User can delete unnecessary tasks
 - Deletion must be confirmed (pop-up)
 
-#### Backend Development (Node.js)
+### Backend Development (Node.js)
 **RESTful API:**
 - RESTful API to facilitates retrieval, addition, update, and deletion of task data
 
