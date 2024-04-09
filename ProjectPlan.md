@@ -36,5 +36,6 @@ This document outlines the project's goals and technologies, including React for
 **Testing:**
 - Unit tests for core functionalities
 - Integrated testing to ensure the entire application functions as expected
-Deployment:
+
+**Deployment:**
 - Render
