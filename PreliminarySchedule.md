@@ -3,11 +3,8 @@
 
 ### Session 1 (Planning):
 Define project objectives, requirements, and user stories.
-Identify stakeholders and their expectations.
-Create a detailed project timeline and milestones.
-Determine project scope and prioritize features.
-Choose development methodologies (e.g., Agile, Scrum).
-Allocate tasks and responsibilities to team members.
+Create a detailed project timeline.
+Choose development methodologies.
 
 ### Sessions 2-3 (Frontend - React Setup):
 **Session 2: Set up development environment for React.**
