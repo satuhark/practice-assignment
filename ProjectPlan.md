@@ -7,7 +7,7 @@ This document outlines the project's goals and technologies, including React for
 ### Frontend (React)
 **Adding New Tasks:**
 - User can add new tasks by using a form
-- Data is saved to database
+- Data is saved to database (MongoDB)
 - User must provide necessary information: Name, Description, Deadline and Status
 - Form validation prevents invalid data
   
