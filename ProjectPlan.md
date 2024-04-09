@@ -7,7 +7,6 @@ This document outlines the project's goals and technologies, including React for
 ### Frontend (React)
 **Adding New Tasks:**
 - User can add new tasks by using a form
-- Data is saved to database (MongoDB)
 - User must provide necessary information: Name, Description, Deadline and Status
 - Form validation prevents invalid data
   
@@ -28,7 +27,7 @@ This document outlines the project's goals and technologies, including React for
 - RESTful API to facilitates retrieval, addition, update, and deletion of task data
 
 **Database Operations:**
-- MongoDB stores tasks
+- Data is saved to MongoDB database
 - CRUD operations for interacting with the database
 
 **Error Handling:**
