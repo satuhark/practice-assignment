@@ -1,1 +1,1 @@
-# harjoitustyo
+# practice-assignment
