@@ -2,9 +2,9 @@
 **Each session is about 3 hours long. 3 hours x 58 = 174 hours**
 
 ### Session 1 (Planning):
-- Define project objectives, requirements, and user stories.
-- Create a detailed project timeline.
-- Choose development methodologies.
+- Define project objectives and goals
+- Create a detailed project timeline
+- Choose methods
 
 ### Sessions 2-3 (Frontend - React Setup):
 **Session 2: Set up development environment for React.**
