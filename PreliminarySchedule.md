@@ -10,7 +10,7 @@
 **Session 2:** 
 - Set up development environment for React.
 - Configure project structure and file organization.
-- Set up version control using Git and establish a repository.
+- Get started with Git to track changes and save project progress. Create a repository to store your project files
 - Create initial React components for layout and routing.
 
 **Session 3:**
