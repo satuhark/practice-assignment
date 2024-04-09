@@ -4,7 +4,7 @@
 
 ### User guide
 
-### Hour logging
+### Hour logging 
 
 **Practice assignment / Satu Härkönen**
 
