@@ -5,7 +5,7 @@
 ### User guide
 
 ### Hour logging
-
+ 
 **Practice assignment / Satu Härkönen**
 
 | Date | Hours | What was done |
