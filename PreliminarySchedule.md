@@ -2,16 +2,16 @@
 **Each session is about 3 hours long. 3 hours x 58 = 174 hours**
 
 ### Session 1 (Planning):
-Define project objectives, requirements, and user stories.
-Create a detailed project timeline.
-Choose development methodologies.
+- Define project objectives, requirements, and user stories.
+- Create a detailed project timeline.
+- Choose development methodologies.
 
 ### Sessions 2-3 (Frontend - React Setup):
 **Session 2: Set up development environment for React.**
-Install necessary dependencies and libraries.
-Configure project structure and file organization.
-Set up version control using Git and establish a repository.
-Create initial React components for layout and routing.
+- Install necessary dependencies and libraries.
+- Configure project structure and file organization.
+- Set up version control using Git and establish a repository.
+- Create initial React components for layout and routing.
 
 **Session 3: Implement basic styling and layout using CSS or a CSS framework.**
 Design user interface components for task management features.
