@@ -14,22 +14,27 @@ This document outlines the project's goals and technologies, including React for
 **Task Display Component:**
 - User can search and view all saved tasks
 - User can view task details
+
 **Task Update Feature:**
 - User can edit existing tasks by providing updated information
 - Updated data is saved to the database
+
 **Task Deletion Feature:**
 - User can delete unnecessary tasks
 - Deletion must be confirmed (pop-up)
 
-**Backend Development (Node.js)**
-RESTful API:
+#### Backend Development (Node.js)
+**RESTful API:**
 - RESTful API to facilitates retrieval, addition, update, and deletion of task data
-Database Operations:
+
+**Database Operations:**
 - MongoDB stores tasks
 - CRUD operations for interacting with the database
-Error Handling:
+
+**Error Handling:**
 - Error handling and providing clear error messages to user
-Testing:
+
+**Testing:**
 - Unit tests for core functionalities
 - Integrated testing to ensure the entire application functions as expected
 Deployment:
