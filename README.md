@@ -1,3 +1,9 @@
+## Link to the app
+
+## Short description of the app
+
+## User guide
+
 ## Hour logging
 
 **Practice assignment / Satu Härkönen**
