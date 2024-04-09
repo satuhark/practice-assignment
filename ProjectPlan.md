@@ -10,6 +10,7 @@ This document outlines the project's goals and technologies, including React for
 - Data is saved to database
 - User must provide necessary information: Name, Description, Deadline and Status
 - Form validation prevents invalid data
+  
 **Task Display Component:**
 - User can search and view all saved tasks
 - User can view task details
