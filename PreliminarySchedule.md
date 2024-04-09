@@ -1,5 +1,5 @@
-### Preliminary Schedule
-*Each session is about 3 hours long. 3 hours x 58 = 174 hours*
+## Preliminary Schedule
+**Each session is about 3 hours long. 3 hours x 58 = 174 hours**
 
 ### Session 1 (Planning):
 Define project objectives, requirements, and user stories.
