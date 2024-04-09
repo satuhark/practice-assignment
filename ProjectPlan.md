@@ -10,13 +10,13 @@ This document outlines the project's goals and technologies, including React for
 - Data is saved to database
 - User must provide necessary information: Name, Description, Deadline and Status
 - Form validation prevents invalid data
-Task Display Component:
+**Task Display Component:**
 - User can search and view all saved tasks
 - User can view task details
-Task Update Feature:
+**Task Update Feature:**
 - User can edit existing tasks by providing updated information
 - Updated data is saved to the database
-Task Deletion Feature:
+**Task Deletion Feature:**
 - User can delete unnecessary tasks
 - Deletion must be confirmed (pop-up)
 
