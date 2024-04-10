@@ -7,7 +7,7 @@ This document outlines the project's goals and technologies, including React for
 ### Frontend (React)
 **Adding New Tasks:**
 - User can add new tasks by using a form
-- User must provide necessary information: Name, Description, Deadline and Status
+- User must provide necessary information: Name, Description, Deadline and Status(To Do, In Progress, Completed, Cancelled)
 - Form validation prevents invalid data
   
 **Task Display Component:**
