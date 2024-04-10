@@ -1,10 +1,11 @@
 import Add from './AddTask'
+import './index.css'
 
 
 const App = () => {
   return (
     <div>
-      <Add/>
+      <Add />
     </div>
   )
 }

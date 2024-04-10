@@ -1,29 +1,22 @@
-import { useState } from 'react'
 import PropTypes from 'prop-types'
+import './index.css'
 
-const Delete = ({id}) => {
-    const [tasks, setTasks] = useState([])
-
-    const deleteTask = (taskId) => {
-        console.log("Before deletion:", tasks)
-        setTasks(tasks.filter(task => task.id !== taskId))
-        console.log("After deletion:", tasks)
-    }
-
+const Delete = ({id, onDelete }) => {
     const confirmDeleteTask = () => {
         const shouldDelete = window.confirm(`Delete task ${id}?`)
         if (shouldDelete) {
-          deleteTask(id)
+          onDelete(id)
         }
       }
 
       return (
-        <button onClick={confirmDeleteTask}>Delete task</button>
+        <button className="delete-button" onClick={confirmDeleteTask}>Delete task</button>
       )
 }
 
 Delete.propTypes = {
-    id: PropTypes.number.isRequired
+    id: PropTypes.number.isRequired,
+    onDelete: PropTypes.func.isRequired
 }
 
 export default Delete
