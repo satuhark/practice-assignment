@@ -23,7 +23,7 @@ const Add = () => {
     const addTask = event => {
         event.preventDefault()
         const newTask = {
-            id: tasks.length + 1,
+            id: (tasks.length + 1).toString(),
             name: name,
             description: description,
             deadline: deadline,

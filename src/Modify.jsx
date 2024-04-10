@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 const Modify = ({ task, onModify }) => {
     const [isEditing, setIsEditing] = useState(false)
@@ -16,8 +17,16 @@ const Modify = ({ task, onModify }) => {
     }
 
     const saveModifiedTask = () => {
-        onModify(modifiedTask)
-        toggleEditing()
+        axios
+        .put(`http://localhost:3001/tasks/${task.id}`, modifiedTask)
+        .then(response => {
+            console.log('Task updated successfully:', response.data)
+            onModify(response.data)
+            toggleEditing()
+        })
+        .catch(error => {
+            console.error('Error updating task:', error)
+            })
     }
 
     return (

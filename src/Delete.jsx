@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import axios from 'axios'
 import './index.css'
 
 const Delete = ({id, onDelete }) => {
@@ -6,7 +7,9 @@ const Delete = ({id, onDelete }) => {
         const shouldDelete = window.confirm(`Delete task ${id}?`)
         if (shouldDelete) {
           onDelete(id)
-        }
+          axios
+          .delete(`http://localhost:3001/tasks/${id}`)
+          }
       }
 
       return (
@@ -20,3 +23,4 @@ Delete.propTypes = {
 }
 
 export default Delete
+
