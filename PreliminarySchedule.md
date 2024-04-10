@@ -14,7 +14,7 @@
 - Create initial React components for layout and routing.
 
 **Session 3:**
-- Implement basic styling and layout using CSS or a CSS framework.
+- Implement basic styling and layout using CSS
 - Design user interface components for task management features.
 
 ### Sessions 4-6 (Frontend - Adding New Tasks):
