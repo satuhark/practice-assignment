@@ -15,12 +15,13 @@
 
 **Session 3:**
 - Implement basic styling and layout using CSS
-- Design user interface components for task management features.
+- Design user interface components
 
 ### Sessions 4-6 (Frontend - Adding New Tasks):
 **Session 4: Develop form components for adding new tasks**
-- Implement input validation to ensure data integrity.
-- Handle form submission and data processing.
+- Implement input validation
+- Handle form submission and data processing
+- Modify-button and Delete-button behind Options-button
 
 **Session 5: Integrate form components with state management**
 - Implement error handling for form submissions.
