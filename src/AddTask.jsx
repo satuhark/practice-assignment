@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Delete from './Delete'
 import Modify from './Modify'
 import './index.css'
@@ -10,7 +11,17 @@ const Add = () => {
     const [deadline, setDeadline] = useState('')
     const [status, setStatus] = useState('')
 
-    const addTask = () => {
+    useEffect(() => {
+        axios
+          .get('http://localhost:3001/tasks')
+          .then(response => {
+            console.log('promise fulfilled')
+            setTasks(response.data)
+          })
+      }, [])
+
+    const addTask = event => {
+        event.preventDefault()
         const newTask = {
             id: tasks.length + 1,
             name: name,
@@ -18,6 +29,11 @@ const Add = () => {
             deadline: deadline,
             status: status,
         }
+        axios
+        .post('http://localhost:3001/tasks', newTask)
+        .then(response => {
+            console.log(response)
+        })
         console.log('New Task:', newTask)
         setTasks([...tasks, newTask])
         setName('')
