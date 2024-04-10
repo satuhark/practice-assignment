@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import Delete from './Delete'
 
 const Add = () => {
     const [tasks, setTasks] = useState([])
@@ -15,6 +16,11 @@ const Add = () => {
             status: status,
         }
         console.log('New Task:', taskObject)
+        setTasks([...tasks, taskObject])
+        setName('')
+        setDescription('')
+        setDeadline('')
+        setStatus('')
     }
     return (
         <div>
@@ -48,6 +54,18 @@ const Add = () => {
                 <option value="Cancelled">Cancelled</option>
             </select>
             <button onClick={addTask}>Add</button>
+
+            <ul>
+                {tasks.map(task => (
+                    <li key={task.id}>
+                        <div>Name: {task.name}</div>
+                        <div>Description: {task.description}</div>
+                        <div>Deadline: {task.deadline}</div>
+                        <div>Status: {task.status}</div>
+                        <Delete/>
+                    </li>
+                ))}
+            </ul>
         </div>
     )
 }
