@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Delete from './Delete'
+import Modify from './Modify'
 import './index.css'
 
 const Add = () => {
@@ -27,6 +28,13 @@ const Add = () => {
 
     const deleteTask = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId))
+    }
+
+    const modifyTask = (modifiedTask) => {
+        const updatedTasks = tasks.map(task =>
+            task.id === modifiedTask.id ? modifiedTask : task
+        );
+        setTasks(updatedTasks)
     }
 
     return (
@@ -70,7 +78,8 @@ const Add = () => {
                         <div>Description: {task.description}</div>
                         <div>Deadline: {task.deadline}</div>
                         <div>Status: {task.status}</div>
-                        <Delete id={task.id} onDelete={deleteTask} /><br/>
+                        <Delete id={task.id} onDelete={deleteTask} />
+                        <Modify task={task} onModify={modifyTask} /><br/>
                     </p>
                 ))}
             </div>

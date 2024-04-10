@@ -22,6 +22,7 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     outline: none;
+    margin-left: 10px;
 }
 
 .input-field input[type="text"]:focus,
@@ -38,10 +39,6 @@ body {
     border-radius: 5px;
 }
 
-button:hover {
-    background-color: #9ebebe;
-}
-
 .delete-button {
     background-color: #dc3545;
     color: white;
@@ -49,4 +46,17 @@ button:hover {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.modify-button {
+    background-color: #00326f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #9ebebe;
 }
