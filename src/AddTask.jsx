@@ -4,6 +4,8 @@ import Delete from './Delete'
 import Modify from './Modify'
 import './index.css'
 
+const baseUrl = 'http://localhost:3001/api/tasks'
+
 const Add = () => {
     const [tasks, setTasks] = useState([])
     const [name, setName] = useState('')
@@ -12,8 +14,24 @@ const Add = () => {
     const [status, setStatus] = useState('')
 
     useEffect(() => {
+        fetchTasks()
+    }, [])
+
+    const fetchTasks = () => {
         axios
-          .get('http://localhost:3001/tasks')
+        .get(baseUrl)
+        .then(response => {
+            console.log('promise fulfilled')
+            setTasks(response.data)
+        })
+        .catch(error => {
+            console.error('Error fetching tasks:', error)
+        })
+    }
+
+    useEffect(() => {
+        axios
+          .get(baseUrl)
           .then(response => {
             console.log('promise fulfilled')
             setTasks(response.data)
@@ -23,16 +41,21 @@ const Add = () => {
     const addTask = event => {
         event.preventDefault()
         const newTask = {
-            id: (tasks.length + 1).toString(),
+            //id: (tasks.length + 1).toString(),
             name: name,
             description: description,
             deadline: deadline,
             status: status,
         }
         axios
-        .post('http://localhost:3001/tasks', newTask)
+        .post(baseUrl, newTask)
         .then(response => {
             console.log(response)
+            //setTasks(prevTasks => [...prevTasks, newTask])
+            fetchTasks()  
+        })
+        .catch(error => {
+            console.error('Error adding task:', error)
         })
         console.log('New Task:', newTask)
         setTasks([...tasks, newTask])
@@ -41,7 +64,7 @@ const Add = () => {
         setDeadline('')
         setStatus('')
     }
-
+    
     const deleteTask = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId))
     }
@@ -49,7 +72,7 @@ const Add = () => {
     const modifyTask = (modifiedTask) => {
         const updatedTasks = tasks.map(task =>
             task.id === modifiedTask.id ? modifiedTask : task
-        );
+        )
         setTasks(updatedTasks)
     }
 
@@ -89,14 +112,14 @@ const Add = () => {
 
             <div>
                 {tasks.map(task => (
-                    <p key={task.id}>
-                        <div>Task: {task.name}</div>
-                        <div>Description: {task.description}</div>
-                        <div>Deadline: {task.deadline}</div>
-                        <div>Status: {task.status}</div>
-                        <Delete id={task.id} onDelete={deleteTask} />
+                    <div key={task.id}>
+                        <p><b>Task: {task.name}</b><br/>
+                        Description: {task.description}<br/>
+                        Deadline: {task.deadline}<br/>
+                        Status: {task.status}</p>
+                        <Delete id={parseInt(task.id)} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} /><br/>
-                    </p>
+                    </div>
                 ))}
             </div>
         </div>

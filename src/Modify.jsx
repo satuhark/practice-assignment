@@ -18,7 +18,7 @@ const Modify = ({ task, onModify }) => {
 
     const saveModifiedTask = () => {
         axios
-        .put(`http://localhost:3001/tasks/${task.id}`, modifiedTask)
+        .put(`http://localhost:3001/api/tasks/${task.id}`, modifiedTask)
         .then(response => {
             console.log('Task updated successfully:', response.data)
             onModify(response.data)
