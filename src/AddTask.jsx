@@ -13,10 +13,6 @@ const Add = () => {
     const [deadline, setDeadline] = useState('')
     const [status, setStatus] = useState('')
 
-    useEffect(() => {
-        fetchTasks()
-    }, [])
-
     const fetchTasks = () => {
         axios
         .get(baseUrl)
@@ -37,11 +33,22 @@ const Add = () => {
             setTasks(response.data)
           })
       }, [])
+      
+    useEffect(() => {
+        fetchTasks()
+    }, [])
 
+    const validateInput = () => {
+        if (!name.trim() || !description.trim() || !deadline.trim() || !status.trim()) {
+            alert('Please fill in all fields.');
+            return false;
+        }
+        return true;
+    }
     const addTask = event => {
         event.preventDefault()
+        if (!validateInput()) return
         const newTask = {
-            //id: (tasks.length + 1).toString(),
             name: name,
             description: description,
             deadline: deadline,
@@ -51,13 +58,11 @@ const Add = () => {
         .post(baseUrl, newTask)
         .then(response => {
             console.log(response)
-            //setTasks(prevTasks => [...prevTasks, newTask])
             fetchTasks()  
         })
         .catch(error => {
             console.error('Error adding task:', error)
         })
-        console.log('New Task:', newTask)
         setTasks([...tasks, newTask])
         setName('')
         setDescription('')

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
+const baseUrl = 'http://localhost:3001/api/tasks'
+
 const Modify = ({ task, onModify }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [modifiedTask, setModifiedTask] = useState(task)
@@ -18,7 +20,7 @@ const Modify = ({ task, onModify }) => {
 
     const saveModifiedTask = () => {
         axios
-        .put(`http://localhost:3001/api/tasks/${task.id}`, modifiedTask)
+        .put(`${baseUrl}/${task.id}`, modifiedTask)
         .then(response => {
             console.log('Task updated successfully:', response.data)
             onModify(response.data)
