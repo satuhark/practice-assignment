@@ -43,7 +43,7 @@ app.get('/api/tasks', (req, res) => {
 })
 
 app.post('/api/tasks', (req, res) => {
-    const newTask = req.body;
+    const newTask = req.body
     Task.create(newTask)
         .then(task => {
             res.status(201).json(task)
