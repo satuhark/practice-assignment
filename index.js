@@ -1,25 +1,10 @@
-const http = require('http')
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const mongoose = require('mongoose')
+const Task = require('./models/task')
 
 app.use(bodyParser.json())
-
-const password = process.argv[2]
-const url = `mongodb+srv://satumharkonen:${password}@cluster0.r4cnza1.mongodb.net/taskApp?retryWrites=true&w=majority`
-
-mongoose.set('strictQuery',false)
-mongoose.connect(url)
-
-const taskSchema = new mongoose.Schema({
-        name: String,
-        description: String,
-        deadline: String,
-        status: String,
-})
-    
-const Task = mongoose.model('Task', taskSchema)
     
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -89,6 +74,6 @@ app.delete('/api/tasks/:id', (req, res) => {
         })
 })
 
-const PORT = 3001
+const PORT = process.env.PORT
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
