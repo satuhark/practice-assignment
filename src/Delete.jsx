@@ -2,13 +2,15 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import './index.css'
 
-const Delete = ({name, _id, onDelete }) => {
+const baseUrl = 'http://localhost:3001/api/tasks'
+
+const Delete = ({name, id, onDelete }) => {
     const confirmDeleteTask = () => {
         const shouldDelete = window.confirm(`Delete task ${name}?`)
         if (shouldDelete) {
-          onDelete(_id.toString())
+          onDelete(id.toString())
           axios
-          .delete(`http://localhost:3001/tasks/${_id}`)
+          .delete(`${baseUrl}/${id}`)
           .then(response => {
             console.log('Task deleted successfully:', response.data)
         })
@@ -24,7 +26,7 @@ const Delete = ({name, _id, onDelete }) => {
 }
 
 Delete.propTypes = {
-    _id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     onDelete: PropTypes.func.isRequired,
     name: PropTypes.string.isRequired,
 }

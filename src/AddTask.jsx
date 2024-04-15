@@ -40,10 +40,10 @@ const Add = () => {
 
     const validateInput = () => {
         if (!name.trim() || !description.trim() || !deadline.trim() || !status.trim()) {
-            alert('Please fill in all fields.');
-            return false;
+            alert('Please fill in all fields.')
+            return false
         }
-        return true;
+        return true
     }
     const addTask = event => {
         event.preventDefault()
@@ -118,12 +118,12 @@ const Add = () => {
 
             <div>
                 {tasks.map(task => (
-                    <div key={task._id}>
+                    <div key={task.id}>
                         <p><b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
                         Deadline: {task.deadline}<br/>
                         Status: {task.status}</p>
-                        <Delete _id={task._id.toString()} name={task.name} onDelete={deleteTask} />
+                        <Delete id={task.id.toString()} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} /><br/>
                     </div>
                 ))}
