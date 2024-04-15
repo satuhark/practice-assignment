@@ -17,6 +17,17 @@ app.options('*', (req, res) => {
     res.status(200).end()
 })
 
+app.get('/api/tasks', (req, res) => {
+    Task.find({})
+        .then(tasks => {
+            res.status(200).json(tasks)
+        })
+        .catch(error => {
+            res.status(500).json({ error: error.message })
+        })
+})
+
+
 app.get('/api/tasks/:id', (req, res) => {
     const taskId = req.params.id
     Task.findById(taskId)
