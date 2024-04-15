@@ -69,6 +69,21 @@ app.put('/api/tasks/:id', (req, res) => {
         })
 })
 
+app.delete('/api/tasks/:_id', (req, res) => {
+    const taskId = req.params.id
+    Task.findByIdAndDelete(taskId)
+        .then(task => {
+            if (task) {
+                res.status(200).json({ message: 'Task deleted successfully' })
+            } else {
+                res.status(404).json({ error: 'Task not found' })
+            }
+        })
+        .catch(error => {
+            res.status(500).json({ error: error.message })
+        })
+})
+
 const PORT = 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
