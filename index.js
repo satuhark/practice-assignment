@@ -32,10 +32,15 @@ app.options('*', (req, res) => {
     res.status(200).end()
 })
 
-app.get('/api/tasks', (req, res) => {
-    Task.find({})
-        .then(tasks => {
-            res.json(tasks)
+app.get('/api/tasks/:id', (req, res) => {
+    const taskId = req.params.id
+    Task.findById(taskId)
+        .then(task => {
+            if (task) {
+                res.status(200).json(task)
+            } else {
+                res.status(404).json({ error: 'Task not found' })
+            }
         })
         .catch(error => {
             res.status(500).json({ error: error.message })
@@ -69,7 +74,7 @@ app.put('/api/tasks/:id', (req, res) => {
         })
 })
 
-app.delete('/api/tasks/:_id', (req, res) => {
+app.delete('/api/tasks/:id', (req, res) => {
     const taskId = req.params.id
     Task.findByIdAndDelete(taskId)
         .then(task => {
