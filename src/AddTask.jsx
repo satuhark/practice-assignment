@@ -48,6 +48,7 @@ const Add = () => {
     const addTask = event => {
         event.preventDefault()
         if (!validateInput()) return
+        
         const newTask = {
             name: name,
             description: description,
@@ -58,12 +59,12 @@ const Add = () => {
         .post(baseUrl, newTask)
         .then(response => {
             console.log(response)
-            fetchTasks()  
+            fetchTasks()
+            setTasks(prevTasks => [...prevTasks, response.data])  
         })
         .catch(error => {
             console.error('Error adding task:', error)
         })
-        setTasks([...tasks, newTask])
         setName('')
         setDescription('')
         setDeadline('')
@@ -117,12 +118,12 @@ const Add = () => {
 
             <div>
                 {tasks.map(task => (
-                    <div key={task.id}>
+                    <div key={task._id}>
                         <p><b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
                         Deadline: {task.deadline}<br/>
                         Status: {task.status}</p>
-                        <Delete id={task._id.toString()} name={task.name} onDelete={deleteTask} />
+                        <Delete _id={task._id.toString()} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} /><br/>
                     </div>
                 ))}
