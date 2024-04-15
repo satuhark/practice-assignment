@@ -1,89 +1,64 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
+const cors = require('cors')
 const Task = require('./models/task')
 
-app.use(bodyParser.json())
-    
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    next()
-    })
+app.use(express.json())
+app.use(cors())
 
-app.options('*', (req, res) => {
-    res.status(200).end()
-})
-
-app.get('/api/tasks', (req, res) => {
+app.get('/api/tasks', (req, res, next) => {
     Task.find({})
         .then(tasks => {
             res.status(200).json(tasks)
         })
-        .catch(error => {
-            res.status(500).json({ error: error.message })
-        })
+        .catch(error => next(error))
 })
 
-
-app.get('/api/tasks/:id', (req, res) => {
-    const taskId = req.params.id
-    Task.findById(taskId)
+app.get('/api/tasks/:id', (req, res, next) => {
+    Task.findById(req.params.id)
         .then(task => {
-            if (task) {
-                res.status(200).json(task)
-            } else {
-                res.status(404).json({ error: 'Task not found' })
-            }
+            task ? res.json(task) : res.status(404).end()
         })
-        .catch(error => {
-            res.status(500).json({ error: error.message })
-        })
+        .catch(error => next(error))
 })
 
-app.post('/api/tasks', (req, res) => {
-    const newTask = req.body
-    Task.create(newTask)
+app.post('/api/tasks', (req, res, next) => {
+    const body = req.body
+    Task.create(body)
         .then(task => {
             res.status(201).json(task)
         })
-        .catch(error => {
-            res.status(400).json({ error: error.message })
-        })
+        .catch(error => next(error))
 })
 
-app.put('/api/tasks/:id', (req, res) => {
-    const taskId = req.params.id
-    const updatedTask = req.body
-    Task.findByIdAndUpdate(taskId, updatedTask, { new: true })
-        .then(task => {
-            if (task) {
-                res.status(200).json(task)
-            } else {
-                res.status(404).json({ error: 'Task not found' })
-            }
-        })
-        .catch(error => {
-            res.status(400).json({ error: error.message })
-        })
+app.put('/api/tasks/:id', (req, res, next) => {
+    const body = req.body
+    Task.findByIdAndUpdate(req.params.id, body, { new: true })
+    .then(updatedTask => {
+        res.json(updatedTask)
+    })
+    .catch(error => next(error))
 })
 
-app.delete('/api/tasks/:id', (req, res) => {
-    const taskId = req.params.id
-    Task.findByIdAndDelete(taskId)
-        .then(task => {
-            if (task) {
-                res.status(200).json({ message: 'Task deleted successfully' })
-            } else {
-                res.status(404).json({ error: 'Task not found' })
-            }
-        })
-        .catch(error => {
-            res.status(500).json({ error: error.message })
-        })
+app.delete('/api/tasks/:id', (req, res, next) => {
+    Task.findByIdAndDelete(req.params.id)
+    .then(task => {
+        const message = task ? 'Task deleted successfully' : 'Task not found'
+        const status = task ? 200 : 404
+        res.status(status).json({ message })
+    })
+        .catch(error => next(error))
 })
+
+const errorHandler = (error, request, response, next) => {
+    console.error(error.message)
+    if (error.name === 'CastError') {
+      return response.status(400).send({ error: 'malformatted id' })
+    } 
+    next(error)
+  }
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT)
