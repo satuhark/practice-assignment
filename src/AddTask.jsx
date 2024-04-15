@@ -122,7 +122,7 @@ const Add = () => {
                         Description: {task.description}<br/>
                         Deadline: {task.deadline}<br/>
                         Status: {task.status}</p>
-                        <Delete id={parseInt(task.id)} onDelete={deleteTask} />
+                        <Delete id={task._id.toString()} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} /><br/>
                     </div>
                 ))}

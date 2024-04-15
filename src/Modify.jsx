@@ -20,7 +20,7 @@ const Modify = ({ task, onModify }) => {
 
     const saveModifiedTask = () => {
         axios
-        .put(`${baseUrl}/${task.id}`, modifiedTask)
+        .put(`${baseUrl}/${task._id}`, modifiedTask)
         .then(response => {
             console.log('Task updated successfully:', response.data)
             onModify(response.data)
