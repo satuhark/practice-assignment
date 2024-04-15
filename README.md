@@ -11,4 +11,5 @@
 | 10.04.2024 | 5 | Initialising frontend components. CSS-styling. Installed dependencies(axios, json-server). Saving data to server. |
 | 11.04.2024 | 5 | Initialize backend. Install dependencies. Connecting frontend to backend. |
 | 12.04.2024 | 4 | Moving data to be handled by Mongodb. Setting up Render. Added input validation. |
+| 15.04.2024 |  | Edited code to work with MongoDB. Fixing errors. Enhancing code structure. |
 
