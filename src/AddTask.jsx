@@ -25,22 +25,40 @@ const Add = () => {
             console.error('Error fetching tasks:', error)
         })
     }
-
-    useEffect(() => {
-        axios
-          .get(baseUrl)
-          .then(response => {
-            console.log('promise fulfilled')
-            setTasks(response.data)
-          })
-      }, [])
       
     useEffect(() => {
         fetchTasks()
     }, [])
 
+    useEffect(() => {
+    const checkForOverdueTasks = async () => {
+        try {
+            const response = await axios.get(baseUrl)
+            const tasks = response.data
+          
+            const currentDate = new Date()
+            
+            tasks.forEach(async (task) => {
+                if (task.status === 'To Do' && new Date(task.deadline) < currentDate) {
+                    const updatedTask = { ...task, status: 'Overdue' }
+                    await axios.put(`${baseUrl}/${task.id}`, updatedTask)
+                    setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? updatedTask : t)))
+                }
+            })
+        } catch (error) {
+            console.error('Error updating task statuses:', error)
+        }
+    }
+
+    checkForOverdueTasks()
+    const intervalId = setInterval(checkForOverdueTasks, 3600000)
+
+    return () => clearInterval(intervalId)
+}, [])
+
+
     const validateInput = () => {
-        if (!name.trim() || !description.trim() || !status.trim()) {
+        if (!name.trim() || !description.trim() || !deadline || !status.trim()) {
             alert('Please fill in all fields.')
             return false
         }
@@ -117,6 +135,7 @@ const Add = () => {
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
                 <option value="Cancelled">Cancelled</option>
+                <option value="Overdue">Cancelled</option>
             </select></div>
             <button className="button" onClick={addTask}>Add task</button>
 
@@ -125,7 +144,7 @@ const Add = () => {
                     <div key={task.id}>
                         <p><b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
-                        Deadline: {task.deadline}<br/>
+                        Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
                         Status: {task.status}</p>
                         <Delete id={task.id.toString()} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} /><br/>
