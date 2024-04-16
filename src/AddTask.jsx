@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Delete from './Delete'
 import Modify from './Modify'
-//import DatePicking from './DatePicker'
+import DatePicking from './DatePicker'
 import './index.css'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
@@ -99,11 +99,10 @@ const Add = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Task Description"
             />
-            <input
-                type="text"
-                value={deadline}
-                onChange={(e) => setDeadline(e.target.value)}
-                placeholder="Task Deadline"
+            <DatePicking
+            value={deadline}
+            onChange={setDeadline}
+            placeholder="Task Deadline"
             />
             <select
                 value={status}
