@@ -1,17 +1,35 @@
-import { useState } from "react"
+
+import PropTypes from 'prop-types'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const DatePicking = () => {
-    const [startDate, setStartDate] = useState(null);
+const DatePicking = ({ selectedDate, setSelectedDate }) => {
+    const handleDateChange = (date) => {
+        setSelectedDate(date)
+    }
     return (
       <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        minDate={(new Date())}
-        placeholderText="Select deadline"
+      todayButton="Today"
+      selected={selectedDate}
+      onChange={handleDateChange}
+      dateFormat="dd-MM-yyyy"
+      minDate={new Date()}
+      placeholderText="Select deadline"
+      peekNextMonth
+      showMonthDropdown
+      showYearDropdown
+      dropdownMode="select"
+      onKeyDown={(e) => {
+        e.preventDefault()
+    }}
+      
       />
     )
-  }
+}
+
+DatePicking.propTypes = {
+    selectedDate: PropTypes.instanceOf(Date),
+    setSelectedDate: PropTypes.func.isRequired
+}
 
 export default DatePicking

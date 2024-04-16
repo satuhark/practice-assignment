@@ -11,7 +11,7 @@ const Add = () => {
     const [tasks, setTasks] = useState([])
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [deadline, setDeadline] = useState('')
+    const [deadline, setDeadline] = useState(null)
     const [status, setStatus] = useState('')
 
     const fetchTasks = () => {
@@ -40,12 +40,20 @@ const Add = () => {
     }, [])
 
     const validateInput = () => {
-        if (!name.trim() || !description.trim() || !deadline.trim() || !status.trim()) {
+        if (!name.trim() || !description.trim() || !status.trim()) {
             alert('Please fill in all fields.')
             return false
         }
         return true
     }
+
+    const clearFields = () => {
+        setName('')
+        setDescription('')
+        setDeadline(null)
+        setStatus('')
+    }
+
     const addTask = event => {
         event.preventDefault()
         if (!validateInput()) return
@@ -61,15 +69,12 @@ const Add = () => {
         .then(response => {
             console.log(response)
             fetchTasks()
-            setTasks(prevTasks => [...prevTasks, response.data])  
+            setTasks(prevTasks => [...prevTasks, response.data])
+            clearFields()
         })
         .catch(error => {
             console.error('Error adding task:', error)
-        })
-        setName('')
-        setDescription('')
-        setDeadline('')
-        setStatus('')
+        }) 
     }
     
     const deleteTask = (taskId) => {
@@ -100,7 +105,8 @@ const Add = () => {
                 placeholder="Task Description"
             />
             <DatePicking
-            
+                selectedDate={deadline}
+                setSelectedDate={setDeadline}
             />
             <select
                 value={status}
