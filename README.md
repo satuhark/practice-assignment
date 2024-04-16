@@ -12,4 +12,4 @@
 | 11.04.2024 | 5 | Initialize backend. Install dependencies. Connecting frontend to backend. |
 | 12.04.2024 | 4 | Moving data to be handled by Mongodb. Setting up Render. Added input validation. |
 | 15.04.2024 | 5 | Edited code to work with MongoDB. Fixing errors. Enhancing code structure, installing dotenv. Error handling. Working on app deadline date picking.|
-
+| 16.04.2024 | 5 | Working on app deadline date picking, and fixing errors.|
