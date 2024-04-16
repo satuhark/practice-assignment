@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Delete from './Delete'
-import Modify from './Modify'
 import DatePicking from './DatePicking'
 import './index.css'
+import TaskOptions from './TaskOptions'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
@@ -98,12 +97,43 @@ const Add = () => {
     const deleteTask = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId))
     }
+    
 
     const modifyTask = (modifiedTask) => {
         const updatedTasks = tasks.map(task =>
             task.id === modifiedTask.id ? modifiedTask : task
         )
         setTasks(updatedTasks)
+    }
+
+    const acceptTask = (taskId) => {
+        const acceptedTask = tasks.find(task => task.id === taskId)
+        if (acceptedTask) {
+            acceptedTask.status = "In Progress"
+            setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
+            axios.put(`${baseUrl}/${taskId}`, acceptedTask)
+                .then(response => {
+                    console.log('Task status updated successfully:', response.data)
+                })
+                .catch(error => {
+                    console.error('Error updating task status:', error)
+                })
+        }
+    }
+    
+    const completeTask = (taskId) => {
+        const completedTask = tasks.find(task => task.id === taskId)
+        if (completedTask) {
+            completedTask.status = "Completed"
+            setTasks(tasks.map(task => (task.id === taskId ? completedTask : task)))
+            axios.put(`${baseUrl}/${taskId}`, completedTask)
+            .then(response => {
+                console.log('Task status updated successfully:', response.data)
+            })
+            .catch(error => {
+                console.error('Error updating task status:', error)
+            })
+        }
     }
 
     return (
@@ -135,7 +165,6 @@ const Add = () => {
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
                 <option value="Cancelled">Cancelled</option>
-                <option value="Overdue">Cancelled</option>
             </select></div>
             <button className="button" onClick={addTask}>Add task</button>
 
@@ -145,9 +174,14 @@ const Add = () => {
                         <p><b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
                         Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
-                        Status: {task.status}</p>
-                        <Delete id={task.id.toString()} name={task.name} onDelete={deleteTask} />
-                        <Modify task={task} onModify={modifyTask} /><br/>
+                        Status: {task.status}
+                        <TaskOptions
+                        task={task}
+                        deleteTask={deleteTask}
+                        modifyTask={modifyTask}
+                        acceptTask={acceptTask}
+                        completeTask={completeTask}/>
+                        </p>
                     </div>
                 ))}
             </div>

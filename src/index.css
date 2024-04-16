@@ -57,6 +57,33 @@ body {
     border-radius: 5px;
 }
 
+.accept-button {
+    background-color: #006f32;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.completed-button {
+    background-color: #6f004f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.options-button {
+    background-color: #95bfe0;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
 button:hover {
     background-color: #9ebebe;
 }
