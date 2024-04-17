@@ -8,7 +8,7 @@ const Delete = ({name, id, onDelete }) => {
     const confirmDeleteTask = () => {
         const shouldDelete = window.confirm(`Delete task ${name}?`)
         if (shouldDelete) {
-          onDelete(id.toString())
+          onDelete(id)
           axios
           .delete(`${baseUrl}/${id}`)
           .then(response => {

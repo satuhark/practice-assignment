@@ -13,7 +13,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
     }
 
     return (
-        <div>
+        <span>
             <button className="options-button" onClick={toggleDropdown}>Options</button>
             {isOpen && (
                 <div className="options-dropdown">
@@ -23,7 +23,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
                     {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id)}>Task Completed</button>}
                 </div>
             )}
-    </div>
+    </span>
     )
 }
 
@@ -31,7 +31,7 @@ TaskOptions.propTypes = {
     task: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        status: PropTypes.oneOf(["To Do", "In Progress", "Completed"]).isRequired
+        status: PropTypes.oneOf(["To Do", "In Progress", "Completed", "Cancelled", "Overdue"]).isRequired
     }),
     deleteTask: PropTypes.func.isRequired,
     modifyTask: PropTypes.func.isRequired,
