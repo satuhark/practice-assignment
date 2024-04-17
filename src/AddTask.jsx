@@ -37,8 +37,8 @@ const Add = () => {
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
                         return updatedTask
                     } else if (currentDate > taskDeadline) {
-                        const updatedTask = { ...task, status: 'Overdue' };
-                        await axios.put(`${baseUrl}/${task.id}`, updatedTask);
+                        const updatedTask = { ...task, status: 'Overdue' }
+                        await axios.put(`${baseUrl}/${task.id}`, updatedTask)
                         return updatedTask;
                     } else {
                     return task
@@ -54,12 +54,8 @@ const Add = () => {
     }, [])
 
     const areDatesEqual = (date1, date2) => {
-        return (
-            date1.getFullYear() === date2.getFullYear() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getDate() === date2.getDate()
-        );
-    };
+        return date1.toDateString() === date2.toDateString();
+    }
     
 
     const sortedTasks = tasks.slice().sort((a, b) => {
@@ -178,7 +174,7 @@ const Add = () => {
                         <b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
                         Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
-                        Status: {task.status}
+                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span>
                         <div><TaskOptions
                         task={{ ...task, id: task.id }}
                         deleteTask={deleteTask}
