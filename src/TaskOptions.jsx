@@ -17,10 +17,10 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
             <button className="options-button" onClick={toggleDropdown}>Options</button>
             {isOpen && (
                 <div className="options-dropdown">
-                    <Delete id={task.id.toString()} name={task.name} onDelete={deleteTask} />
+                    <Delete id={task.id} name={task.name} onDelete={deleteTask} />
                     <Modify task={task} onModify={modifyTask} />
-                    {task.status === "To Do" && <button className="accept-button" onClick={() => acceptTask(task.id)}>Accept Task</button>}
-                    {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id)}>Task Completed</button>}
+                    {task.status === "To Do" && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
+                    {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
                 </div>
             )}
     </span>
@@ -29,7 +29,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
 
 TaskOptions.propTypes = {
     task: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         status: PropTypes.oneOf(["To Do", "In Progress", "Completed", "Cancelled", "Overdue"]).isRequired
     }),

@@ -6,6 +6,10 @@ const baseUrl = 'http://localhost:3001/api/tasks'
 
 const Delete = ({name, id, onDelete }) => {
     const confirmDeleteTask = () => {
+      if (!id) {
+        console.error('No ID provided for deletion.')
+        return
+    }
         const shouldDelete = window.confirm(`Delete task ${name}?`)
         if (shouldDelete) {
           onDelete(id)

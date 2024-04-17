@@ -176,7 +176,7 @@ const Add = () => {
                         Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
                         Status: {task.status}
                         <TaskOptions
-                        task={{ ...task, id: +task.id }}
+                        task={{ ...task, id: task.id }}
                         deleteTask={deleteTask}
                         modifyTask={modifyTask}
                         acceptTask={acceptTask}
