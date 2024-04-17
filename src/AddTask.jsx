@@ -171,17 +171,17 @@ const Add = () => {
             <div>
                 {tasks.map(task => (
                     <div key={task.id}>
-                        <p><b>Task: {task.name}</b><br/>
+                        <b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
                         Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
                         Status: {task.status}
-                        <TaskOptions
+                        <div><TaskOptions
                         task={{ ...task, id: task.id }}
                         deleteTask={deleteTask}
                         modifyTask={modifyTask}
                         acceptTask={acceptTask}
                         completeTask={completeTask}/>
-                        </p>
+                        </div>
                     </div>
                 ))}
             </div>

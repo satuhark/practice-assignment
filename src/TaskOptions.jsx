@@ -13,7 +13,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
     }
 
     return (
-        <span>
+    <span>
             <button className="options-button" onClick={toggleDropdown}>Options</button>
             {isOpen && (
                 <div className="options-dropdown">
@@ -23,7 +23,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
                     {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
                 </div>
             )}
-    </span>
+            </span>
     )
 }
 

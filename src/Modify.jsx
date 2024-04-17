@@ -32,7 +32,7 @@ const Modify = ({ task, onModify }) => {
     }
 
     return (
-        <div>
+        <span>
             {isEditing ? (
                 <div className ="input-field">
                     <input
@@ -69,7 +69,7 @@ const Modify = ({ task, onModify }) => {
             ) : (
                 <button className="modify-button" onClick={toggleEditing}>Modify task</button>
             )}
-        </div>
+        </span>
     )
 }
 
