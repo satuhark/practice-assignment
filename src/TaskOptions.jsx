@@ -13,18 +13,18 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
     }
 
     return (
-    <span>
-            <button className="options-button" onClick={toggleDropdown}>Options</button>
-            {isOpen && (
-                <div className="options-dropdown">
-                    <Delete id={task.id} name={task.name} onDelete={deleteTask} />
-                    <Modify task={task} onModify={modifyTask} />
-                    {task.status === "To Do" && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
-                    {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
-                </div>
-            )}
-            </span>
-    )
+        <span className="button-container">
+                <button className="options-button" onClick={toggleDropdown}>Options</button>
+                {isOpen && (
+                    <div className="options-dropdown">
+                        <Delete id={task.id} name={task.name} onDelete={deleteTask} />
+                        <Modify task={task} onModify={modifyTask} />
+                        {task.status === "To Do" && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
+                        {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
+                    </div>
+                )}
+                </span>
+        )
 }
 
 TaskOptions.propTypes = {

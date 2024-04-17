@@ -62,7 +62,6 @@ const Modify = ({ task, onModify }) => {
                         <option value="To Do">To Do</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
-                        <option value="Cancelled">Cancelled</option>
                     </select>
                     <button className="modify-button" onClick={saveModifiedTask}>Save</button>
                 </div>

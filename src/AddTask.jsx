@@ -11,7 +11,6 @@ const Add = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState(null)
-    const [status, setStatus] = useState('')
 
     const fetchTasks = () => {
         axios
@@ -57,7 +56,7 @@ const Add = () => {
 
 
     const validateInput = () => {
-        if (!name.trim() || !description.trim() || !deadline || !status.trim()) {
+        if (!name.trim() || !description.trim() || !deadline) {
             alert('Please fill in all fields.')
             return false
         }
@@ -68,7 +67,6 @@ const Add = () => {
         setName('')
         setDescription('')
         setDeadline(null)
-        setStatus('')
     }
 
     const addTask = event => {
@@ -79,7 +77,7 @@ const Add = () => {
             name: name,
             description: description,
             deadline: deadline,
-            status: status,
+            status: "To Do",
         }
         axios
         .post(baseUrl, newTask)
@@ -156,17 +154,9 @@ const Add = () => {
                 selectedDate={deadline}
                 setSelectedDate={setDeadline}
             />
-            <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-            >
-                <option value="">Select Status</option>
-                <option value="To Do">To Do</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Completed">Completed</option>
-                
-            </select></div>
             <button className="button" onClick={addTask}>Add task</button>
+            </div>
+            
 
             <div>
                 {tasks.map(task => (

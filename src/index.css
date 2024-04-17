@@ -11,6 +11,7 @@ body {
 }
 
 .input-field {
+    font-size: 12px;
     margin-bottom: 10px;
     padding: 12px 20px;
     border: 1px solid transparent;
@@ -18,6 +19,7 @@ body {
 
 .input-field input[type="text"], 
 .input-field select {
+    font-size: 14px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -37,6 +39,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: 5px
 }
 
 .delete-button {
@@ -55,6 +58,8 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: 5px
+
 }
 
 .accept-button {
@@ -64,6 +69,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: 5px
 }
 
 .completed-button {
@@ -73,6 +79,7 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    margin-left: 5px
 }
 
 .options-button {
@@ -82,8 +89,54 @@ body {
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
+    margin-bottom: 5px;
+
 }
 
 button:hover {
     background-color: #9ebebe;
 }
+
+.button-container {
+    display: flex;
+    gap: 5px;
+}
+.react-datepicker {
+    font-size: 12px;
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border: 1px solid;
+}
+  .react-datepicker__header {
+    padding-top: 3px;
+    line-height: 10px;
+    background-color: #a6bee3;
+    border: 1px solid;
+  }
+
+  .react-datepicker__today-button {
+    padding-top: 3px;
+    line-height: 10px;
+    background-color: #a6bee3;
+    border: 1px solid;
+  }
+
+  .react-datepicker__month {
+    margin: 1px 1px;
+  }
+  .react-datepicker__day-name, .react-datepicker__day {
+    width: 30px;
+    line-height: 20px;
+    margin: 1px;
+  }
+  .react-datepicker__current-month {
+    font-size: 12px;
+  }
+  .react-datepicker__year-select,
+  .react-datepicker__month-select {
+    font-size: 10px;
+    padding: 4px;
+    width: 80px;
+    height: 40px;
+}
+  

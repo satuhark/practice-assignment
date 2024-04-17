@@ -8,7 +8,8 @@ const DatePicking = ({ selectedDate, setSelectedDate }) => {
         setSelectedDate(date)
     }
     return (
-      <DatePicker
+      <DatePicker 
+      className="react-datepicker"
       todayButton="Today"
       selected={selectedDate}
       onChange={handleDateChange}
@@ -22,9 +23,8 @@ const DatePicking = ({ selectedDate, setSelectedDate }) => {
       onKeyDown={(e) => {
         e.preventDefault()
     }}
-      
-      />
-    )
+    />
+)
 }
 
 DatePicking.propTypes = {
