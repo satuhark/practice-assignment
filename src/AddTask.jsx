@@ -30,12 +30,19 @@ const Add = () => {
             try {
                 const currentDate = new Date()
                 const updatedTasks = await Promise.all(tasks.map(async (task) => {
-                    if (task.status === 'To Do' && new Date(task.deadline) < currentDate) {
-                        const updatedTask = { ...task, status: 'Overdue' }
+                    const taskDeadline = new Date(task.deadline)
+                    
+                    if (areDatesEqual(currentDate, taskDeadline)) {
+                        const updatedTask = { ...task, status: 'Due today' }
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
                         return updatedTask
-                    }
+                    } else if (currentDate > taskDeadline) {
+                        const updatedTask = { ...task, status: 'Overdue' };
+                        await axios.put(`${baseUrl}/${task.id}`, updatedTask);
+                        return updatedTask;
+                    } else {
                     return task
+                }
                 }))
                 setTasks(updatedTasks)
             } catch (error) {
@@ -45,6 +52,15 @@ const Add = () => {
 
         checkForOverdueTasks()
     }, [])
+
+    const areDatesEqual = (date1, date2) => {
+        return (
+            date1.getFullYear() === date2.getFullYear() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getDate() === date2.getDate()
+        );
+    };
+    
 
     const sortedTasks = tasks.slice().sort((a, b) => {
         const dateA = new Date(a.deadline)
@@ -154,7 +170,10 @@ const Add = () => {
             </div>
             
             <div>
-                {sortedTasks.map(task => (
+            <h2>Tasks</h2>
+                {sortedTasks
+                .filter(task => task.status !== 'Completed')
+                .map(task => (
                     <div key={task.id}>
                         <b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
@@ -170,6 +189,29 @@ const Add = () => {
                     </div>
                 ))}
             </div>
+            <div>
+            <h2>History</h2>
+            {sortedTasks
+                .filter(task => task.status === 'Completed')
+                .map(task => (
+                    <div key={task.id}>
+                        <b>Task: {task.name}</b><br/>
+                        Description: {task.description}<br/>
+                        Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
+                        Status: {task.status}
+                        <div><TaskOptions
+                            task={{ ...task, id: task.id }}
+                            deleteTask={deleteTask}
+                            modifyTask={modifyTask}
+                            acceptTask={acceptTask}
+                            completeTask={completeTask}
+                        /></div>
+                    </div>
+                ))
+            }
+        </div>
+
+
         </div>
     )
 }
