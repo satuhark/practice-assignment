@@ -13,4 +13,4 @@
 | 12.04.2024 | 4 | Moving data to be handled by Mongodb. Setting up Render. Added input validation. |
 | 15.04.2024 | 5 | Edited code to work with MongoDB. Fixing errors. Enhancing code structure, installing dotenv. Error handling. Working on app deadline date picking.|
 | 16.04.2024 | 5 | Working on app deadline date picking. Fixing errors. Automatic status update to Overdue if deadline has passed. Options-button. |
-| 17.04.2024 | 6 | Fixing errors. Modifying task status option. CSS-styling. Organizing tasks by due date. |
+| 17.04.2024 | 6 | Fixing errors. Modifying task status option. CSS-styling. Organizing tasks by due date and status. Dividing completed tasks to History-section. |
