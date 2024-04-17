@@ -13,13 +13,14 @@ const DatePicking = ({ selectedDate, setSelectedDate }) => {
       todayButton="Today"
       selected={selectedDate}
       onChange={handleDateChange}
-      dateFormat="dd-MM-yyyy"
+      dateFormat="dd/MM/yyyy"
       minDate={new Date()}
       placeholderText="Select deadline"
       peekNextMonth
       showMonthDropdown
       showYearDropdown
       dropdownMode="select"
+      utcOffset={new Date().getTimezoneOffset()}
       onKeyDown={(e) => {
         e.preventDefault()
     }}

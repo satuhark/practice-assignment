@@ -11,49 +11,46 @@ const Add = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState(null)
-
-    const fetchTasks = () => {
-        axios
-        .get(baseUrl)
-        .then(response => {
-            console.log('promise fulfilled')
-            setTasks(response.data)
-        })
-        .catch(error => {
-            console.error('Error fetching tasks:', error)
-        })
-    }
-      
+    
     useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await axios.get(baseUrl)
+                console.log('promise fulfilled')
+                setTasks(response.data)
+            } catch (error) {
+                console.error('Error fetching tasks:', error)
+            }
+        }
         fetchTasks()
     }, [])
 
     useEffect(() => {
-    const checkForOverdueTasks = async () => {
-        try {
-            const response = await axios.get(baseUrl)
-            const tasks = response.data
-          
-            const currentDate = new Date()
-            
-            tasks.forEach(async (task) => {
-                if (task.status === 'To Do' && new Date(task.deadline) < currentDate) {
-                    const updatedTask = { ...task, status: 'Overdue' }
-                    await axios.put(`${baseUrl}/${task.id}`, updatedTask)
-                    setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? updatedTask : t)))
-                }
-            })
-        } catch (error) {
-            console.error('Error updating task statuses:', error)
+        const checkForOverdueTasks = async () => {
+            try {
+                const currentDate = new Date()
+                const updatedTasks = await Promise.all(tasks.map(async (task) => {
+                    if (task.status === 'To Do' && new Date(task.deadline) < currentDate) {
+                        const updatedTask = { ...task, status: 'Overdue' }
+                        await axios.put(`${baseUrl}/${task.id}`, updatedTask)
+                        return updatedTask
+                    }
+                    return task
+                }))
+                setTasks(updatedTasks)
+            } catch (error) {
+                console.error('Error updating task statuses:', error)
+            }
         }
-    }
 
-    checkForOverdueTasks()
-    const intervalId = setInterval(checkForOverdueTasks, 3600000)
+        checkForOverdueTasks()
+    }, [])
 
-    return () => clearInterval(intervalId)
-}, [])
-
+    const sortedTasks = tasks.slice().sort((a, b) => {
+        const dateA = new Date(a.deadline)
+        const dateB = new Date(b.deadline)
+        return dateA - dateB
+    })
 
     const validateInput = () => {
         if (!name.trim() || !description.trim() || !deadline) {
@@ -83,7 +80,6 @@ const Add = () => {
         .post(baseUrl, newTask)
         .then(response => {
             console.log(response)
-            fetchTasks()
             setTasks(prevTasks => [...prevTasks, response.data])
             clearFields()
         })
@@ -157,9 +153,8 @@ const Add = () => {
             <button className="button" onClick={addTask}>Add task</button>
             </div>
             
-
             <div>
-                {tasks.map(task => (
+                {sortedTasks.map(task => (
                     <div key={task.id}>
                         <b>Task: {task.name}</b><br/>
                         Description: {task.description}<br/>
