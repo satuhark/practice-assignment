@@ -164,7 +164,7 @@ const Add = () => {
                 <option value="To Do">To Do</option>
                 <option value="In Progress">In Progress</option>
                 <option value="Completed">Completed</option>
-                <option value="Cancelled">Cancelled</option>
+                
             </select></div>
             <button className="button" onClick={addTask}>Add task</button>
 
@@ -176,7 +176,7 @@ const Add = () => {
                         Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
                         Status: {task.status}
                         <TaskOptions
-                        task={task}
+                        task={{ ...task, id: +task.id }}
                         deleteTask={deleteTask}
                         modifyTask={modifyTask}
                         acceptTask={acceptTask}
