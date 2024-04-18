@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test node --test",
+    "test": "cross-env NODE_ENV=test mocha --recursive --require @babel/register tests",
     "lint": "eslint ."
   },
   "author": "Satu Härkönen",
@@ -18,7 +18,10 @@
     "mongoose": "^8.3.1"
   },
   "devDependencies": {
+    "@babel/register": "^7.23.7",
+    "chai": "^5.1.0",
     "cross-env": "^7.0.3",
+    "mocha": "^10.4.0",
     "nodemon": "^3.1.0",
     "supertest": "^6.3.4"
   }
