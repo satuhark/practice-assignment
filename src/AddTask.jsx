@@ -11,17 +11,20 @@ const Add = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [deadline, setDeadline] = useState(null)
+    const [showHistory, setShowHistory] = useState(false)
+    const [buttonText, setButtonText] = useState('Completed Tasks')
+    
+   const fetchTasks = async () => {
+    try {
+        const response = await axios.get(baseUrl)
+            console.log('fetches tasks succesfully')
+            setTasks(response.data)
+        } catch (error) {
+            console.error('Error fetching tasks:', error)
+        }
+    }
     
     useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const response = await axios.get(baseUrl)
-                console.log('promise fulfilled')
-                setTasks(response.data)
-            } catch (error) {
-                console.error('Error fetching tasks:', error)
-            }
-        }
         fetchTasks()
     }, [])
 
@@ -39,19 +42,29 @@ const Add = () => {
                     } else if (currentDate > taskDeadline) {
                         const updatedTask = { ...task, status: 'Overdue' }
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
-                        return updatedTask;
+                        return updatedTask
                     } else {
                     return task
                 }
                 }))
-                setTasks(updatedTasks)
+                if (updatedTasks.length !== tasks.length) {
+                    setTasks(updatedTasks)
+                }
             } catch (error) {
                 console.error('Error updating task statuses:', error)
             }
         }
-
         checkForOverdueTasks()
-    }, [])
+    }, [tasks])
+
+    useEffect(() => {
+        fetchTasks()
+    }, [showHistory])
+
+    const toggleHistory = () => {
+        setShowHistory(!showHistory)
+        setButtonText(showHistory ? 'Completed Tasks' : 'Hide Completed Tasks')
+    }
 
     const areDatesEqual = (date1, date2) => {
         return date1.toDateString() === date2.toDateString();
@@ -91,7 +104,6 @@ const Add = () => {
         axios
         .post(baseUrl, newTask)
         .then(response => {
-            console.log(response)
             setTasks(prevTasks => [...prevTasks, response.data])
             clearFields()
         })
@@ -142,6 +154,7 @@ const Add = () => {
         }
     }
 
+
     return (
         <div className="add-container">
             <h2>Add a task</h2>
@@ -186,26 +199,37 @@ const Add = () => {
                 ))}
             </div>
             <div>
-            <h2>History</h2>
-            {sortedTasks
-                .filter(task => task.status === 'Completed')
-                .map(task => (
-                    <div key={task.id}>
-                        <b>Task: {task.name}</b><br/>
-                        Description: {task.description}<br/>
-                        Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
-                        Status: {task.status}
-                        <div><TaskOptions
-                            task={{ ...task, id: task.id }}
-                            deleteTask={deleteTask}
-                            modifyTask={modifyTask}
-                            acceptTask={acceptTask}
-                            completeTask={completeTask}
-                        /></div>
+            <button className="history-button" onClick={toggleHistory}>{buttonText}</button><br/>
+                {showHistory && (
+                    <div>
+                        {sortedTasks
+                        .filter(task => task.status === 'Completed')
+                        .map(task => (
+                            <div key={task.id}>
+                                <b>Task: {task.name}</b>
+                                <br />
+                                Description: {task.description}
+                                <br />
+                                Deadline:{' '}
+                                {task.deadline
+                                    ? new Date(task.deadline).toLocaleDateString()
+                                    : 'No deadline'}
+                                <br />
+                                Status: {task.status}
+                                <div>
+                                    <TaskOptions
+                                        task={{ ...task, id: task.id }}
+                                        deleteTask={deleteTask}
+                                        modifyTask={modifyTask}
+                                        acceptTask={acceptTask}
+                                        completeTask={completeTask}
+                                    />
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))
-            }
-        </div>
+                )}
+            </div>
 
 
         </div>

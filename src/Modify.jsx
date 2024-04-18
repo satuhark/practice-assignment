@@ -58,7 +58,6 @@ const Modify = ({ task, onModify }) => {
                         value={modifiedTask.status}
                         onChange={handleInputChange}
                     >
-                        <option value="">Select Status</option>
                         <option value="To Do">To Do</option>
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
