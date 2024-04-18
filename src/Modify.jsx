@@ -7,10 +7,14 @@ const baseUrl = 'http://localhost:3001/api/tasks'
 const Modify = ({ task, onModify }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [modifiedTask, setModifiedTask] = useState(task)
+    const [showModify, setShowModify] = useState(false)
+    const [buttonText, setButtonText] = useState('Modify')
 
     const toggleEditing = () => {
         setIsEditing(!isEditing)
         setModifiedTask(task)
+        setShowModify(!showModify)
+        setButtonText(showModify ? 'Modify' : 'Cancel')
     }
 
     const handleInputChange = (e) => {
@@ -63,9 +67,10 @@ const Modify = ({ task, onModify }) => {
                         <option value="Completed">Completed</option>
                     </select>
                     <button className="modify-button" onClick={saveModifiedTask}>Save</button>
+                    <button className="modify-button" onClick={toggleEditing}>{buttonText}</button>
                 </div>
             ) : (
-                <button className="modify-button" onClick={toggleEditing}>Modify task</button>
+                <button className="modify-button" onClick={toggleEditing}>{buttonText}</button>
             )}
         </span>
     )
