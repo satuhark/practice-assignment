@@ -15,4 +15,4 @@ lähinnä oleva deadline näkyy ekana
 | 15.04.2024 | 5 | Edited code to work with MongoDB. Fixing errors. Enhancing code structure, installing dotenv. Error handling. Working on app deadline date picking.|
 | 16.04.2024 | 5 | Working on app deadline date picking. Fixing errors. Automatic status update to Overdue if deadline has passed. Options-button. |
 | 17.04.2024 | 6 | Fixing errors. Modifying task status option. CSS-styling. Organizing tasks by due date and status, developing status update further. Dividing completed tasks to History-section. |
-| 18.04.2024 |  | Buttons: History, Cancel(modify), Hide Options. Fixing some errors. |
+| 18.04.2024 | 6 | Buttons: History, Cancel(modify), Hide Options. Fixing some errors. Creating tests for Node. |
