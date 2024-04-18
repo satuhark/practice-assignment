@@ -3,6 +3,7 @@
 ### Short description of the app
 
 ### User guide
+lähinnä oleva deadline näkyy ekana
 
 ### Hour logging 
 | Date | Hours | What was done |
