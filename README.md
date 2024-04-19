@@ -12,10 +12,10 @@ lähinnä oleva deadline näkyy ekana
 | 10.04.2024 | 5 | Initialising frontend components. CSS-styling. Installed dependencies(axios, json-server). Saving data to server. |
 | 11.04.2024 | 5 | Initialize backend. Install dependencies. Connecting frontend to backend. |
 | 12.04.2024 | 4 | Moving data to be handled by Mongodb. Setting up Render. Added input validation. |
-| 1st week | 19 hours |  |
+| 1st week | =19 |  |
 | 15.04.2024 | 5 | Edited code to work with MongoDB. Fixing errors. Enhancing code structure, installing dotenv. Error handling. Working on app deadline date picking.|
 | 16.04.2024 | 5 | Working on app deadline date picking. Fixing errors. Automatic status update to Overdue if deadline has passed. Options-button. |
 | 17.04.2024 | 6 | Fixing errors. Modifying task status option. CSS-styling. Organizing tasks by due date and status, developing status update further. Dividing completed tasks to History-section. |
 | 18.04.2024 | 6 | Buttons: History, Cancel(modify), Hide Options. Fixing some errors. Creating tests for Node. |
 | 19.04.2024 | 7 | Testing, refactoring code, fixing errors. |
-| 2nd week | 29 hours |  |
+| 2nd week | =29 |  |
