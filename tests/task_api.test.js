@@ -1,11 +1,27 @@
-const { test, after } = require('node:test')
+const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const Task = require('../models/task')
 
 const app = require('../app')
 
 const api = supertest(app)
+
+const initialTasks = [
+    {
+        name: "HTML is easy",
+        description: "",
+        deadline: "",
+        status: ""
+    },
+    {
+        name: "Browser can execute only JavaScript",
+        description: "",
+        deadline: "",
+        status: ""
+    },
+  ]
 
 test('tasks are returned as json', async () => {
   await api
@@ -17,17 +33,25 @@ test('tasks are returned as json', async () => {
     })
 })
 
-test('there are two notes', async () => {
+test('there are two tasks', async () => {
     const response = await api.get('/api/tasks')
   
-    assert.strictEqual(response.body.length, 2)
+    assert.strictEqual(response.body.length, initialTasks.length)
   })
   
-  test('the first note is about HTTP methods', async () => {
+  test('the first task is about HTTP methods', async () => {
     const response = await api.get('/api/tasks')
   
-    const contents = response.body.map(e => e.content)
-    assert(contents.includes('HTML is easy'))
+    const name = response.body.map(e => e.name)
+    assert(name.includes('HTML is easy'))
+  })
+
+  beforeEach(async () => {
+    await Task.deleteMany({})
+    let taskObject = new Task(initialTasks[0])
+    await taskObject.save()
+    taskObject = new Task(initialTasks[1])
+    await taskObject.save()
   })
 
 after(async () => {
