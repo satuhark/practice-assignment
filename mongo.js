@@ -16,20 +16,20 @@ mongoose.connect(url)
 mongoose.connection.on('connected', () => {
   console.log('Connected to MongoDB')
 
-const noteSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
   content: String,
   important: Boolean,
 })
 
-const Note = mongoose.model('Note', noteSchema)
+const Task = mongoose.model('Task', taskSchema)
 
-const note = new Note({
+const task = new Task({
   content: 'HTML is easy',
   important: true,
 })
 
-note.save().then(result => {
-  console.log('note saved!')
+task.save().then(result => {
+  console.log('task saved!')
   mongoose.connection.close()
 })
 })
