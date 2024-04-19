@@ -78,7 +78,6 @@ test('a specific task is within the returned tasks', async () => {
         const names = tasksAtEnd.map(n => n.name)
         assert(names.includes('async/await simplifies making async calls'))
     } catch (error) {
-
         console.error('Error in test:', error)
         assert.fail(error)
     }
@@ -103,6 +102,27 @@ test('task without name is not added', async () => {
     }
 })
 
+test('a specific task can be viewed', async () => {
+    const tasksAtStart = await helper.tasksInDb()
+    const taskToView = tasksAtStart[0]
+    const resultTask = await api
+      .get(`/api/tasks/${taskToView.id}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+    assert.deepStrictEqual(resultTask.body, taskToView)
+  })
+
+  test('a task can be deleted', async () => {
+    const tasksAtStart = await helper.tasksInDb()
+    const taskToDelete = tasksAtStart[0]
+    await api
+      .delete(`/api/tasks/${taskToDelete.id}`)
+      .expect(200)
+    const tasksAtEnd = await helper.tasksInDb()
+    const names = tasksAtEnd.map(r => r.name)
+    assert(!names.includes(taskToDelete.name))
+    assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length - 1)
+  })
 
 after(async () => {
   await mongoose.connection.close()

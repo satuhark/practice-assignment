@@ -1,5 +1,6 @@
 const config = require('./utils/config')
 const express = require('express')
+require('express-async-errors')
 const app = express()
 const cors = require('cors')
 const tasksRouter = require('./controllers/tasks')
@@ -10,7 +11,7 @@ const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 
 logger.info('connecting to', config.MONGODB_URI)
-logger.info(config.TEST_MONGODB_URI)
+logger.info('test mongo url', config.TEST_MONGODB_URI)
 
 mongoose.connect(config.MONGODB_URI)
   .then(() => {
