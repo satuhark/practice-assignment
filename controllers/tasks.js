@@ -1,4 +1,5 @@
 const tasksRouter = require('express').Router()
+const jwt = require('jsonwebtoken')
 const Task = require('../models/task')
 const User = require('../models/user')
 
@@ -12,9 +13,21 @@ tasksRouter.get('/:id', async (req, res) => {
         task ? res.json(task) : res.status(404).end()
 })
 
+const getTokenFrom = request => {
+    const authorization = request.get('authorization')
+    if (authorization && authorization.startsWith('Bearer ')) {
+      return authorization.replace('Bearer ', '')
+    }
+    return null
+  }
+
 tasksRouter.post('/', async (req, res) => {
         const body = req.body
-        const user = await User.findById(body.userId)
+        const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+        if (!decodedToken.id) {
+            return response.status(401).json({ error: 'token invalid' })
+        }
+        const user = await User.findById(decodedToken.id)
         if (!body.name || !body.description || !body.deadline || !body.status) {
             return res.status(400).json({ error: 'content missing' })
         }
@@ -23,13 +36,13 @@ tasksRouter.post('/', async (req, res) => {
             description: body.description,
             status: body.status,
             deadline: body.deadline,
-            user: user.id
+            user: user._id
           })
         
         const savedTask = await task.save()
         user.tasks = user.tasks.concat(savedTask._id)
         await user.save()
-        res.status(201).json(task)
+        res.status(201).json(savedTask)
 })
 
 tasksRouter.put('/:id', async (req, res) => {
