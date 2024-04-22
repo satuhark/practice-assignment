@@ -1,5 +1,6 @@
 const tasksRouter = require('express').Router()
 const Task = require('../models/task')
+const User = require('../models/user')
 
 tasksRouter.get('/', async (req, res) => {
     const tasks = await Task.find({})
@@ -13,10 +14,21 @@ tasksRouter.get('/:id', async (req, res) => {
 
 tasksRouter.post('/', async (req, res) => {
         const body = req.body
-        const task = await Task.create(body)
+        const user = await User.findById(body.userId)
         if (!body.name || !body.description || !body.deadline || !body.status) {
             return res.status(400).json({ error: 'content missing' })
         }
+        const task = new Task({
+            name: body.name,
+            description: body.description,
+            status: body.status,
+            deadline: body.deadline,
+            user: user.id
+          })
+        
+        const savedTask = await task.save()
+        user.tasks = user.tasks.concat(savedTask._id)
+        await user.save()
         res.status(201).json(task)
 })
 

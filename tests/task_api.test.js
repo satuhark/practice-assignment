@@ -37,7 +37,8 @@ describe('Adding tasks', () => {
             name: 'async/await simplifies making async calls',
             description: "jdsks",
             deadline: "22.04.2024",
-            status: "To Do"
+            status: "To Do",
+            userId: ""
         }
         await api
             .post('/api/tasks')
@@ -59,7 +60,7 @@ describe('Adding tasks', () => {
             .send(newTask)
             .expect(400)
             const tasksAtEnd = await helper.tasksInDb()
-            assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length + 1)
+            assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length)
     })
 })
 
