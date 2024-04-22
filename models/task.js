@@ -5,6 +5,10 @@ const taskSchema = new mongoose.Schema({
     description: String,
     deadline: String,
     status: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
 })
 
 taskSchema.set('toJSON', {
