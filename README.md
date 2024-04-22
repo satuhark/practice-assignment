@@ -19,4 +19,4 @@ lähinnä oleva deadline näkyy ekana
 | 18.04.2024 | 6 | Buttons: History, Cancel(modify), Hide Options. Fixing some errors. Creating tests for Node. |
 | 19.04.2024 | 7 | Testing, refactoring code, fixing errors. |
 | 2nd week | =29 |  |
-| 22.04.2024 | | Logging in. |
+| 22.04.2024 | 8 | Logging in, token authentication, fixing errors & testing. |
