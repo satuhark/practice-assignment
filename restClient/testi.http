@@ -1,7 +1,11 @@
-POST http://localhost:3001/api/login
+POST http://localhost:3001/api/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY2MjhjZDE3NGE0NmU5MDAzMmRiZmNiMSIsImlhdCI6MTcxMzk1MTI5MH0.h_PYeqT2Vo4E6weJjesIqWGzt6CEJ5MnsZQX2oZHLx0
 
 {
-    "username": "",
-    "password": ""
+    "name": "String",
+    "description": "String",
+    "deadline": "String",
+    "status": "String",
+    "userId": "ahosio3ueajd"
 }

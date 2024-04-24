@@ -13,8 +13,8 @@ tasksRouter.get('/:id', async (req, res) => {
         task ? res.json(task) : res.status(404).end()
 })
 
-const getTokenFrom = request => {
-    const authorization = request.get('authorization')
+const getTokenFrom = req => {
+    const authorization = req.get('authorization')
     if (authorization && authorization.startsWith('Bearer ')) {
       return authorization.replace('Bearer ', '')
     }
@@ -23,9 +23,9 @@ const getTokenFrom = request => {
 
 tasksRouter.post('/', async (req, res) => {
         const body = req.body
-        const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+        const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
         if (!decodedToken.id) {
-            return response.status(401).json({ error: 'token invalid' })
+            return res.status(401).json({ error: 'token invalid' })
         }
         const user = await User.findById(decodedToken.id)
         if (!body.name || !body.description || !body.deadline || !body.status) {
@@ -36,7 +36,7 @@ tasksRouter.post('/', async (req, res) => {
             description: body.description,
             status: body.status,
             deadline: body.deadline,
-            user: user._id
+            user: user.id
           })
         
         const savedTask = await task.save()
