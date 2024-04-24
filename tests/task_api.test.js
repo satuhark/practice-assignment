@@ -9,6 +9,7 @@ const helper = require('./test_helper')
 const Task = require('../models/task')
 const User = require('../models/user')
 
+
 beforeEach(async () => {
     await Task.deleteMany({})
     for (let task of helper.initialTasks) {
@@ -32,6 +33,16 @@ describe('Returning tasks', () => {
 })
 
 describe('Adding tasks', () => {
+    let token = ''
+    beforeEach(async () => {
+        const loginResponse = await api
+            .post('/api/login')
+            .send({ username: "root", password: "salainen" })
+            console.log("LOGIN RESPONSE:", loginResponse.body)
+            token = loginResponse.body.token
+            console.log("TOKEN:", token)
+    })
+
     test('a valid task can be added ', async () => {
         const newTask = {
             name: 'async/await simplifies making async calls',
@@ -42,6 +53,7 @@ describe('Adding tasks', () => {
         }
         await api
             .post('/api/tasks')
+            .set('Authorization', `Bearer ${token}`)
             .send(newTask)
             .expect(201)
             .expect('Content-Type', /application\/json/)
@@ -57,12 +69,14 @@ describe('Adding tasks', () => {
         }
         await api
             .post('/api/tasks')
+            .set('Authorization', `Bearer ${token}`)
             .send(newTask)
             .expect(400)
             const tasksAtEnd = await helper.tasksInDb()
             assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length)
     })
 })
+
 
 describe('Viewing and deleting', () => {
     test('a specific task can be viewed', async () => {
