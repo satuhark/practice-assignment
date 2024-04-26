@@ -13,7 +13,7 @@ const DatePicking = ({ selectedDate, setSelectedDate }) => {
       todayButton="Today"
       selected={selectedDate}
       onChange={handleDateChange}
-      dateFormat="dd/MM/yyyy"
+      dateFormat="dd/MM/YYYY"
       minDate={new Date()}
       placeholderText="Select deadline"
       peekNextMonth

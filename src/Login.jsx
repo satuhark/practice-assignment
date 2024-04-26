@@ -7,19 +7,22 @@ const Login = ({ setUser }) => {
     const [username, setUsername] = useState('') 
     const [password, setPassword] = useState('')
     
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault()
-        console.log('logging in with', username, password)
+        console.log('Logging in with', username, password)
         try {
-            const user = loginService.login({
+            const user = await loginService.login({ 
                 username, 
                 password,
             })
             setUser(user)
-          } catch (error) {
-            console.error('Error logging in', error)
-          }
+            setUsername('')
+            setPassword('')
+            localStorage.setItem('token', user.token)
+        } catch (error) {
+            console.error('Error logging in:', error)
         }
+    }
 
 return (
         <form onSubmit={handleLogin}>

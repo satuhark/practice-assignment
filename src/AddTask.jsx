@@ -15,6 +15,13 @@ const Add = () => {
     const [showHistory, setShowHistory] = useState(false)
     const [buttonText, setButtonText] = useState('Completed Tasks')
     const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+        }
+    }, [])
     
    const fetchTasks = async () => {
     try {
@@ -185,8 +192,7 @@ const Add = () => {
 
     return (
         <>
-        {user === null && <Login setUser={updateUser}/>}
-        {user !== null && taskForm()}
+        {user === null ? <Login setUser={updateUser}/> : taskForm()}
             <div>
                 <h2>Tasks</h2>
                 {sortedTasks
