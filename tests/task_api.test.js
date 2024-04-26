@@ -49,7 +49,7 @@ describe('Adding tasks', () => {
             description: "jdsks",
             deadline: "22.04.2024",
             status: "To Do",
-            userId: "662b454adb99479b155d5365"
+            userId: ""
         }
         await api
             .post('/api/tasks')

@@ -1,9 +1,12 @@
-POST http://localhost:3001/api/login
+POST http://localhost:3001/api/tasks
 Content-Type: application/json
-//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY2MjhjZDE3NGE0NmU5MDAzMmRiZmNiMSIsImlhdCI6MTcxMzk1MTI5MH0.h_PYeqT2Vo4E6weJjesIqWGzt6CEJ5MnsZQX2oZHLx0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhdHUiLCJpZCI6IjY2MmI0NTRhZGI5OTQ3OWIxNTVkNTM2NSIsImlhdCI6MTcxNDExNDI4MywiZXhwIjoxNzE0MTE3ODgzfQ.S2K4RUo0BnuHwxPX09vMk6mQ-HOI4ulpbqSCc6s_oIw
 
 {
-    "username": "satu",
-    "password": "satu"
+    "name": "async/await simplifies making async calls",
+    "description": "jdsks",
+    "deadline": "22.04.2024",
+    "status": "To Do",
+    "userId": "662b454adb99479b155d5365"
 }
 
