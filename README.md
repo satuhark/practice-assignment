@@ -21,3 +21,4 @@ lähinnä oleva deadline näkyy ekana
 | 2nd week | =34 |  |
 | 22.04.2024 | 8 | Logging in, token authentication, fixing errors & testing. |
 | 24.04.2024 | 5 | Fixing errors & testing. |
+| 26.04.2024 | 8 | Fixing errors, testing, log in  for frontend. |
