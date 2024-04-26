@@ -37,9 +37,9 @@ describe('Adding tasks', () => {
     beforeEach(async () => {
         const loginResponse = await api
             .post('/api/login')
-            .send({ username: "root", password: "salainen" })
+            .set({ username: "satu", password: "satu" })
             console.log("LOGIN RESPONSE:", loginResponse.body)
-            token = loginResponse.body.token
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhdHUiLCJpZCI6IjY2MmI0NTRhZGI5OTQ3OWIxNTVkNTM2NSIsImlhdCI6MTcxNDExMjM4NiwiZXhwIjoxNzE0MTE1OTg2fQ.JLmF3jId7ZvDjvLC7TQ8lWBurU1S9reO4zxF1cPKuJk"
             console.log("TOKEN:", token)
     })
 
@@ -49,7 +49,7 @@ describe('Adding tasks', () => {
             description: "jdsks",
             deadline: "22.04.2024",
             status: "To Do",
-            userId: ""
+            userId: "662b454adb99479b155d5365"
         }
         await api
             .post('/api/tasks')
