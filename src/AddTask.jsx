@@ -3,6 +3,7 @@ import axios from 'axios'
 import DatePicking from './DatePicking'
 import './index.css'
 import TaskOptions from './TaskOptions'
+import Login from './Login'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
@@ -13,6 +14,7 @@ const Add = () => {
     const [deadline, setDeadline] = useState(null)
     const [showHistory, setShowHistory] = useState(false)
     const [buttonText, setButtonText] = useState('Completed Tasks')
+    const [user, setUser] = useState(null)
     
    const fetchTasks = async () => {
     try {
@@ -154,85 +156,89 @@ const Add = () => {
         }
     }
 
-
-    return (
+    const taskForm = () => (
         <div className="add-container">
             <h2>Add a task</h2>
             <div className="input-field">
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Task Name"
-            />
-            <input
-                type="text"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Task Description"
-            />
-            <DatePicking
-                selectedDate={deadline}
-                setSelectedDate={setDeadline}
-            />
-            <button className="button" onClick={addTask}>Add task</button>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Task Name" />
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Task Description" />
+                <DatePicking
+                    selectedDate={deadline}
+                    setSelectedDate={setDeadline} />
+                <button className="button" onClick={addTask}>Add task</button>
             </div>
-            
+        </div>
+        )
+
+        const updateUser = (userData) => {
+            setUser(userData)
+        }
+
+
+    return (
+        <>
+        {user === null && <Login setUser={updateUser}/>}
+        {user !== null && taskForm()}
             <div>
-            <h2>Tasks</h2>
+                <h2>Tasks</h2>
                 {sortedTasks
-                .filter(task => task.status !== 'Completed')
-                .map(task => (
-                    <div key={task.id}>
-                        <b>Task: {task.name}</b><br/>
-                        Description: {task.description}<br/>
-                        Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br/>
-                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span>
-                        <div><TaskOptions
-                        task={{ ...task, id: task.id }}
-                        deleteTask={deleteTask}
-                        modifyTask={modifyTask}
-                        acceptTask={acceptTask}
-                        completeTask={completeTask}/>
+                    .filter(task => task.status !== 'Completed')
+                    .map(task => (
+                        <div key={task.id}>
+                            <b>Task: {task.name}</b><br />
+                            Description: {task.description}<br />
+                            Deadline: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'No deadline'}<br />
+                            Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span>
+                            <div><TaskOptions
+                                task={{ ...task, id: task.id }}
+                                deleteTask={deleteTask}
+                                modifyTask={modifyTask}
+                                acceptTask={acceptTask}
+                                completeTask={completeTask} />
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
             <div>
-            <button className="history-button" onClick={toggleHistory}>{buttonText}</button><br/>
+                <button className="history-button" onClick={toggleHistory}>{buttonText}</button><br />
                 {showHistory && (
                     <div>
                         {sortedTasks
-                        .filter(task => task.status === 'Completed')
-                        .map(task => (
-                            <div key={task.id}>
-                                <b>Task: {task.name}</b>
-                                <br />
-                                Description: {task.description}
-                                <br />
-                                Deadline:{' '}
-                                {task.deadline
-                                    ? new Date(task.deadline).toLocaleDateString()
-                                    : 'No deadline'}
-                                <br />
-                                Status: {task.status}
-                                <div>
-                                    <TaskOptions
-                                        task={{ ...task, id: task.id }}
-                                        deleteTask={deleteTask}
-                                        modifyTask={modifyTask}
-                                        acceptTask={acceptTask}
-                                        completeTask={completeTask}
-                                    />
+                            .filter(task => task.status === 'Completed')
+                            .map(task => (
+                                <div key={task.id}>
+                                    <b>Task: {task.name}</b>
+                                    <br />
+                                    Description: {task.description}
+                                    <br />
+                                    Deadline:{' '}
+                                    {task.deadline
+                                        ? new Date(task.deadline).toLocaleDateString()
+                                        : 'No deadline'}
+                                    <br />
+                                    Status: {task.status}
+                                    <div>
+                                        <TaskOptions
+                                            task={{ ...task, id: task.id }}
+                                            deleteTask={deleteTask}
+                                            modifyTask={modifyTask}
+                                            acceptTask={acceptTask}
+                                            completeTask={completeTask} />
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 )}
             </div>
-
-
-        </div>
+        </>
     )
 }
 
