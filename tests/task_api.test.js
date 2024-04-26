@@ -37,9 +37,9 @@ describe('Adding tasks', () => {
     beforeEach(async () => {
         const loginResponse = await api
             .post('/api/login')
-            .set({ username: "satu", password: "satu" })
+            .send({ username: "satu", password: "satu" })
             console.log("LOGIN RESPONSE:", loginResponse.body)
-            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhdHUiLCJpZCI6IjY2MmI0NTRhZGI5OTQ3OWIxNTVkNTM2NSIsImlhdCI6MTcxNDExMjM4NiwiZXhwIjoxNzE0MTE1OTg2fQ.JLmF3jId7ZvDjvLC7TQ8lWBurU1S9reO4zxF1cPKuJk"
+            token = loginResponse.body.token
             console.log("TOKEN:", token)
     })
 
