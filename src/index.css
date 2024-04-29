@@ -32,6 +32,21 @@ body {
     border: 3px solid #555;
 }
 
+.input-field input[type="password"], 
+.input-field select {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin-left: 10px;
+}
+
+.input-field input[type="password"]:focus,
+.input-field select:focus {
+    border: 3px solid #555;
+}
+
 .button {
     background-color: #007bff;
     color: white;

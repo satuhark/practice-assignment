@@ -25,27 +25,26 @@ const Login = ({ setUser }) => {
     }
 
 return (
+    <div className="add-container">
+        <h2>Login</h2>
         <form onSubmit={handleLogin}>
-        <div>
-          username
+        <div className="input-field">
             <input
             type="text"
             value={username}
-            name="Username"
+            placeholder="Username"
             onChange={({ target }) => setUsername(target.value)}
           />
-        </div>
-        <div>
-          password
             <input
             type="password"
             value={password}
-            name="Password"
+            placeholder="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
-        </div>
-        <button type="submit">Login</button>
+        <button className="button" type="submit">Login</button>
+      </div>
       </form>
+      </div>
     )
 }
 
