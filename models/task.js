@@ -1,14 +1,23 @@
 const mongoose = require('mongoose')
 
 const taskSchema = new mongoose.Schema({
-    name: String,
-    description: String,
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
     deadline: String,
-    status: String,
+    status: {
+        type: String,
+        enum: ['To Do', 'In Progress', 'Completed'],
+        default: 'To Do'
+    },
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }
+        type: String
+    }
 })
 
 taskSchema.set('toJSON', {
