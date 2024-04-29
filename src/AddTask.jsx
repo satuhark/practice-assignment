@@ -4,6 +4,7 @@ import DatePicking from './DatePicking'
 import './index.css'
 import TaskOptions from './TaskOptions'
 import Login from './Login'
+import Register from './Register'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
@@ -109,6 +110,7 @@ const Add = () => {
             description: description,
             deadline: deadline,
             status: "To Do",
+            user: user.name
         }
         axios
         .post(baseUrl, newTask)
@@ -137,6 +139,7 @@ const Add = () => {
         const acceptedTask = tasks.find(task => task.id === taskId)
         if (acceptedTask) {
             acceptedTask.status = "In Progress"
+            acceptedTask.assignedTo = user.name
             setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
             axios.put(`${baseUrl}/${taskId}`, acceptedTask)
                 .then(response => {
@@ -200,7 +203,10 @@ const Add = () => {
         return (
             <>
                 {user === null ? (
-                    <Login setUser={setUser} />
+                    <div>
+                        <Login setUser={updateUser} />
+                        <Register />
+                    </div>
                 ) : (
                     <div>
                         {taskForm()}
@@ -213,7 +219,8 @@ const Add = () => {
                                         <b>Task: {task.name}</b><br />
                                         Description: {task.description}<br />
                                         Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span>
+                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status === 'In Progress' ? task.status+', Assigned to ' + task.assignedTo : task.status}</span><br/>
+                                        Created By: {task.user}<br />
                                         <div>
                                             <TaskOptions
                                                 task={{ ...task, id: task.id }}
@@ -237,7 +244,8 @@ const Add = () => {
                                                 <b>Task: {task.name}</b><br />
                                                 Description: {task.description}<br />
                                                 Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                                Status: {task.status}
+                                                Status: {task.status}<br/>
+                                                Created By: {task.user}<br/>
                                                 <div>
                                                     <TaskOptions
                                                         task={{ ...task, id: task.id }}
@@ -258,4 +266,4 @@ const Add = () => {
         );
     };
     
-    export default Add;
+    export default Add
