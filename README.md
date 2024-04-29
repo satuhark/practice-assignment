@@ -23,4 +23,4 @@ lähinnä oleva deadline näkyy ekana
 | 24.04.2024 | 5 | Fixing errors & testing. |
 | 26.04.2024 | 8 | Fixing errors, testing, log in option for frontend. |
 | 3rd week | =21 |  |
-| 29.04.2024 | 8 | Fixed error with dates. Developing logging in further. Register form for new users, assigning tasks to users. |
+| 29.04.2024 | 8 | Fixed error with dates. Developing logging in further. Register form for new users, assigning tasks to users. Adding more functions. |
