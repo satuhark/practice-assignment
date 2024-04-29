@@ -189,6 +189,8 @@ const Add = () => {
         )
 
         const updateUser = (userData) => {
+            console.log("NAME:",userData.name)
+            console.log("Current User:", userData)
             setUser(userData)
         }
 
@@ -228,6 +230,7 @@ const Add = () => {
                                                 modifyTask={modifyTask}
                                                 acceptTask={acceptTask}
                                                 completeTask={completeTask}
+                                                currentUser={user}
                                             />
                                         </div>
                                     </div>
@@ -263,7 +266,7 @@ const Add = () => {
                     </div>
                 )}
             </>
-        );
-    };
+        )
+    }
     
     export default Add

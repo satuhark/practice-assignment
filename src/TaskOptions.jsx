@@ -5,7 +5,7 @@ import Modify from './Modify'
 import './index.css'
 
 
-const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask }) => {
+const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, currentUser }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [showOptions, setShowOptions] = useState(false)
     const [buttonText, setButtonText] = useState('Options')
@@ -22,7 +22,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask })
                 {isOpen && (
                     <div className="options-dropdown">
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} />
-                        <Modify task={task} onModify={modifyTask} />
+                        <Modify task={task} onModify={modifyTask} userId={currentUser.id} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
                         {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
                     </div>
@@ -40,7 +40,8 @@ TaskOptions.propTypes = {
     deleteTask: PropTypes.func.isRequired,
     modifyTask: PropTypes.func.isRequired,
     acceptTask: PropTypes.func.isRequired,
-    completeTask: PropTypes.func.isRequired
+    completeTask: PropTypes.func.isRequired,
+    currentUser: PropTypes.object
 }
 
 export default TaskOptions

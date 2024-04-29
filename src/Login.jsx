@@ -20,11 +20,11 @@ const Login = ({ setUser }) => {
             setUsername('')
             setPassword('')
         } catch (error) {
-            console.error('Error logging in:', error)
-            if (error.response && error.response.status === 401) {
-                alert('Incorrect username or password.')
-            }
+            const errorMessage = error.response.data.error
+            if (errorMessage.includes('Please fill in username and password')) {
+                    alert('Please fill in username and password')
         }
+    }
     }
 
 return (

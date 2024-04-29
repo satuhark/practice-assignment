@@ -4,11 +4,12 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
-const Modify = ({ task, onModify }) => {
+const Modify = ({ task, onModify, userId }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [modifiedTask, setModifiedTask] = useState(task)
     const [showModify, setShowModify] = useState(false)
     const [buttonText, setButtonText] = useState('Modify')
+    const [assignToMe, setAssignToMe] = useState(false)
 
     const toggleEditing = () => {
         setIsEditing(!isEditing)
@@ -22,7 +23,14 @@ const Modify = ({ task, onModify }) => {
         setModifiedTask({ ...modifiedTask, [name]: value })
     }
 
+    const handleAssignToMe = () => {
+        setAssignToMe(!assignToMe)
+    }
+
     const saveModifiedTask = () => {
+        if (assignToMe) {
+            modifiedTask.user = userId
+        }
         axios
         .put(`${baseUrl}/${task.id}`, modifiedTask)
         .then(response => {
@@ -66,6 +74,7 @@ const Modify = ({ task, onModify }) => {
                         <option value="In Progress">In Progress</option>
                         <option value="Completed">Completed</option>
                     </select>
+                    <button className="modify-button" onClick={handleAssignToMe}>Assign to me</button>
                     <button className="modify-button" onClick={saveModifiedTask}>Save</button>
                     <button className="modify-button" onClick={toggleEditing}>{buttonText}</button>
                 </div>
@@ -79,6 +88,7 @@ const Modify = ({ task, onModify }) => {
 Modify.propTypes = {
     task: PropTypes.object.isRequired,
     onModify: PropTypes.func.isRequired,
+    userId: String
 }
 
 export default Modify
