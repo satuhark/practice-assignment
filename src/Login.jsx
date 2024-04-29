@@ -15,12 +15,15 @@ const Login = ({ setUser }) => {
                 username, 
                 password,
             })
+            localStorage.setItem('token', user.token)
             setUser(user)
             setUsername('')
             setPassword('')
-            localStorage.setItem('token', user.token)
         } catch (error) {
             console.error('Error logging in:', error)
+            if (error.response && error.response.status === 401) {
+                alert('Incorrect username or password.')
+            }
         }
     }
 

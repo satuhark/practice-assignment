@@ -17,16 +17,31 @@ const Register = () => {
             return
         }
         
-        const response = await axios.post('http://localhost:3001/api/users', {
-            username,
-            name,
-            password
-        })
-        console.log('User created successfully:', response.data)
-        setUsername('')
-        setName('')
-        setPassword('')
-        setConfirmPassword('')
+        try {
+            const response = await axios.post('http://localhost:3001/api/users', {
+                username,
+                name,
+                password
+            })
+            console.log('User created successfully:', response.data)
+            setUsername('')
+            setName('')
+            setPassword('')
+            setConfirmPassword('')
+            setError('')
+        } catch (error) {
+            if (error.response.status === 400) {
+                const errorMessage = error.response.data.error
+                if (errorMessage.includes('expected `username` to be unique')) {
+                    alert('Username is already in use. Choose another username.')
+                } else {
+                    setError('An error occurred while registering.')
+                }
+            } else {
+                setError('An unexpected error occurred.')
+            }
+            setUsername('')
+        }
     }
 
     return (
