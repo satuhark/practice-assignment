@@ -22,7 +22,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
                 {isOpen && (
                     <div className="options-dropdown">
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} />
-                        <Modify task={task} onModify={modifyTask} userId={currentUser.id} />
+                        <Modify task={task} onModify={modifyTask} user={currentUser} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
                         {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
                     </div>

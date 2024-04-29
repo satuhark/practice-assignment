@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
-const Modify = ({ task, onModify, userId }) => {
+const Modify = ({ task, onModify, user }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [modifiedTask, setModifiedTask] = useState(task)
     const [showModify, setShowModify] = useState(false)
@@ -24,12 +24,17 @@ const Modify = ({ task, onModify, userId }) => {
     }
 
     const handleAssignToMe = () => {
-        setAssignToMe(!assignToMe)
+        setAssignToMe(true)
+        if (assignToMe === true) {
+            modifiedTask.user = user.name
+            console.log("ASSIGNED TO:", user.name)
+        }
+        
     }
 
     const saveModifiedTask = () => {
         if (assignToMe) {
-            modifiedTask.user = userId
+            modifiedTask.user = user
         }
         axios
         .put(`${baseUrl}/${task.id}`, modifiedTask)
@@ -88,7 +93,7 @@ const Modify = ({ task, onModify, userId }) => {
 Modify.propTypes = {
     task: PropTypes.object.isRequired,
     onModify: PropTypes.func.isRequired,
-    userId: String
+    user: PropTypes.object
 }
 
 export default Modify
