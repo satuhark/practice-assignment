@@ -36,7 +36,7 @@ tasksRouter.post('/', async (req, res) => {
             description: body.description,
             status: body.status,
             deadline: body.deadline,
-            user: user.name
+            user: body.user
           })
         
         const savedTask = await task.save()
