@@ -20,11 +20,10 @@ const Login = ({ setUser }) => {
             setUsername('')
             setPassword('')
         } catch (error) {
-            const errorMessage = error.response.data.error
-            if (errorMessage.includes('User or password incorrect')) {
-                    alert('User or password incorrect')
+            if (error.response && error.response.status === 401) {
+                alert('User or password incorrect')
+            }
         }
-    }
     }
 
 return (

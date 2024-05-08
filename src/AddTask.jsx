@@ -138,10 +138,9 @@ const Add = () => {
 
     const acceptTask = (taskId) => {
         const acceptedTask = tasks.find(task => task.id === taskId)
-        if (acceptedTask) {
-            acceptedTask.status = "In Progress"
+        if (acceptedTask)
+        {   acceptedTask.status = "In Progress"
             acceptedTask.assignedTo = user.name
-            console.log("ASSIGNED TO", acceptedTask.assignedTo)
             setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
             axios.put(`${baseUrl}/${taskId}`, acceptedTask)
                 .then(response => {

@@ -24,7 +24,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} user={currentUser} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && <button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>}
-                        {task.status === "In Progress" && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
+                        {(task.status === "In Progress" || task.assignedTo) && <button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>}
                     </div>
                 )}
                 </span>
@@ -35,7 +35,8 @@ TaskOptions.propTypes = {
     task: PropTypes.shape({
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
-        status: PropTypes.oneOf(["To Do", "In Progress", "Completed", "Cancelled", "Overdue", "Due today"]).isRequired
+        status: PropTypes.oneOf(["To Do", "In Progress", "Completed", "Cancelled", "Overdue", "Due today"]).isRequired,
+        assignedTo: PropTypes.string.isRequired,
     }),
     deleteTask: PropTypes.func.isRequired,
     modifyTask: PropTypes.func.isRequired,
