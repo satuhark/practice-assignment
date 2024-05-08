@@ -25,17 +25,11 @@ const Modify = ({ task, onModify, user }) => {
 
     const handleAssignToMe = () => {
         setAssignToMe(true)
-        if (assignToMe === true) {
-            modifiedTask.user = user.name
-            console.log("ASSIGNED TO:", user.name)
-        }
-        
+        modifiedTask.assignedTo = user.name
+        console.log("MODIFIED ASSIGNED TO:", user.name)
     }
 
     const saveModifiedTask = () => {
-        if (assignToMe) {
-            modifiedTask.user = user
-        }
         axios
         .put(`${baseUrl}/${task.id}`, modifiedTask)
         .then(response => {

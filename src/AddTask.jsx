@@ -141,6 +141,7 @@ const Add = () => {
         if (acceptedTask) {
             acceptedTask.status = "In Progress"
             acceptedTask.assignedTo = user.name
+            console.log("ASSIGNED TO", acceptedTask.assignedTo)
             setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
             axios.put(`${baseUrl}/${taskId}`, acceptedTask)
                 .then(response => {
@@ -223,7 +224,8 @@ const Add = () => {
                                         <b>Task: {task.name}</b><br />
                                         Description: {task.description}<br />
                                         Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status === 'In Progress' ? task.status+', Assigned to ' + task.assignedTo : task.status}</span><br/>
+                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span><br/>
+                                        Assigned to: {task.assignedTo}<br />
                                         Created By: {task.user}<br />
                                         <div>
                                             <TaskOptions
