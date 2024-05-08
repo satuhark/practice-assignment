@@ -13,7 +13,9 @@ const Register = () => {
         event.preventDefault()
 
         if (password !== confirmPassword) {
-            setError('Passwords do not match')
+            alert('Passwords do not match')
+            setPassword('')
+            setConfirmPassword('')
             return
         }
         

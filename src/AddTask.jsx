@@ -4,7 +4,6 @@ import DatePicking from './DatePicking'
 import './index.css'
 import TaskOptions from './TaskOptions'
 import Login from './Login'
-import Register from './Register'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
@@ -207,10 +206,10 @@ const Add = () => {
                 {user === null ? (
                     <div>
                         <Login setUser={updateUser} />
-                        <Register />
                     </div>
                 ) : (
                     <div>
+                        <p>{user.name} logged in</p>
                         {taskForm()}
                         <div>
                             <h2>Tasks</h2>
