@@ -2,44 +2,33 @@ import { useState } from 'react'
 import './index.css'
 import loginService from './services/login'
 import PropTypes from 'prop-types'
-import Register from './Register'
 
 const Login = ({ setUser }) => {
     const [username, setUsername] = useState('') 
     const [password, setPassword] = useState('')
-    const [loggedIn, setLoggedIn] = useState(false)
     
     const handleLogin = async (event) => {
         event.preventDefault()
         console.log('Logging in with', username, password)
-        setLoggedIn(true)
         try {
             const user = await loginService.login({ 
                 username, 
                 password,
             })
-            window.localStorage.setItem('loggedUser', JSON.stringify(user))
-            loginService.setToken(user.token)
+            localStorage.setItem('token', user.token)
             setUser(user)
             setUsername('')
             setPassword('')
-            
         } catch (error) {
-            if (error.response && error.response.status === 401) {
-                alert('User or password incorrect')
-            }
+            const errorMessage = error.response.data.error
+            if (errorMessage.includes('User or password incorrect')) {
+                    alert('User or password incorrect')
+        }
     }
-    }
-
-    const handleLogout = async (event) => {
-        event.preventDefault()
-        window.localStorage.removeItem('loggedUser')
-        setLoggedIn(false)
     }
 
 return (
-    !loggedIn ? (
-        <div className="add-container">
+    <div className="add-container">
         <h2>Login</h2>
         <form onSubmit={handleLogin}>
         <div className="input-field">
@@ -58,11 +47,7 @@ return (
         <button className="button" type="submit">Login</button>
       </div>
       </form>
-      <div><Register /></div>
       </div>
-    ) : (
-        <button onClick={handleLogout}>Log out</button>
-    )
     )
 }
 

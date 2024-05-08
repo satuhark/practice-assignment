@@ -4,6 +4,7 @@ import DatePicking from './DatePicking'
 import './index.css'
 import TaskOptions from './TaskOptions'
 import Login from './Login'
+import Register from './Register'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
@@ -15,11 +16,13 @@ const Add = () => {
     const [showHistory, setShowHistory] = useState(false)
     const [buttonText, setButtonText] = useState('Completed Tasks')
     const [user, setUser] = useState(null)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (token) {
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+            setLoggedIn(true)
         }
     }, [])
     
@@ -79,7 +82,6 @@ const Add = () => {
         return date1.toDateString() === date2.toDateString()
     }
     
-
     const sortedTasks = tasks.slice().sort((a, b) => {
         const dateA = new Date(a.deadline)
         const dateB = new Date(b.deadline)
@@ -205,11 +207,12 @@ const Add = () => {
             <>
                 {user === null ? (
                     <div>
-                        <Login setUser={updateUser} />
+                        <Login setUser={updateUser}  />
+                        <Register/>
                     </div>
                 ) : (
                     <div>
-                        <p>{user.name} logged in</p>
+                        <p>{user.name} logged in {loggedIn && <button onClick={() => { setUser(null); setLoggedIn(false); }}>Logout</button>}</p>
                         {taskForm()}
                         <div>
                             <h2>Tasks</h2>
