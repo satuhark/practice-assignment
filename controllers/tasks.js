@@ -28,6 +28,9 @@ tasksRouter.post('/', async (req, res) => {
             return res.status(401).json({ error: 'token invalid' })
         }
         const user = await User.findById(decodedToken.id)
+        if (!user) {
+          return res.status(404).json({ error: 'User not found' })
+        }
         if (!body.name || !body.description || !body.deadline || !body.status) {
             return res.status(400).json({ error: 'content missing' })
         }
@@ -36,7 +39,7 @@ tasksRouter.post('/', async (req, res) => {
             description: body.description,
             status: body.status,
             deadline: body.deadline,
-            user: body.user
+            user: user._id
           })
         
         const savedTask = await task.save()
