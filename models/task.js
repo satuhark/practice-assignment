@@ -17,8 +17,9 @@ const taskSchema = new mongoose.Schema({
     },
     assignedTo: String,
     user: {
-        type: String
-    }
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User'
+        },
 })
 
 taskSchema.set('toJSON', {
