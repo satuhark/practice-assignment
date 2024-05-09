@@ -25,3 +25,4 @@ lähinnä oleva deadline näkyy ekana
 | 3rd week | =21 |  |
 | 29.04.2024 | 8 | Fixed error with dates. Developing logging in further. Register form for new users, assigning tasks to users. Adding more functions. |
 | 08.05.2024 | 8 | Logout function. Fixing errors with modifying/assigning tasks. |
+| 09.05.2024 | 8 | Fixing errors with completing tasks/userID problem. |
