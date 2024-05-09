@@ -16,10 +16,6 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
         setButtonText(showOptions ? 'Options' : 'Hide Options')
     }
 
-    console.log("CURRENT USER.ID:", currentUser)
-    console.log("TASK.ASSIGNEDTO.ID:",task.assignedTo)
-    console.log("Task:", task)
-
     return (
         <span className="button-container">
                 <button className="options-button" onClick={toggleDropdown}>{buttonText}</button>
@@ -28,7 +24,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} user={currentUser} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && !task.assignedTo && (<button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>)}
-                        {(task.assignedTo && task.user.id === currentUser.id) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
+                        {(task.assignedTo && task.user.name === currentUser) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
                     </div>
                 )}
                 </span>
@@ -40,23 +36,13 @@ TaskOptions.propTypes = {
         id: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         status: PropTypes.oneOf(["To Do", "In Progress", "Completed", "Cancelled", "Overdue", "Due today"]).isRequired,
-        assignedTo: PropTypes.oneOfType([
-            PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                username: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired,
-            }),
-            PropTypes.string.isRequired
-        ]).isRequired,
-        user: PropTypes.oneOfType([
-            PropTypes.shape({
-                id: PropTypes.string.isRequired,
-                username: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired,
-            }),
-            PropTypes.string.isRequired
-        ]).isRequired,        
-    }).isRequired,
+        assignedTo: PropTypes.string,
+        user: PropTypes.shape({
+            username: PropTypes.string,
+            name: PropTypes.string,
+            id: PropTypes.string,
+        }),
+    }),
     deleteTask: PropTypes.func.isRequired,
     modifyTask: PropTypes.func.isRequired,
     acceptTask: PropTypes.func.isRequired,

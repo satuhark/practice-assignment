@@ -17,7 +17,6 @@ const Add = () => {
     const [buttonText, setButtonText] = useState('Completed Tasks')
     const [user, setUser] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
-    const [currentUser, setCurrentUser] = useState(null)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -112,10 +111,21 @@ const Add = () => {
             description: description,
             deadline: deadline,
             status: "To Do",
-            user: user.name
+            user: user
         }
+
+        const token = localStorage.getItem('token')
+        if (!token) {
+            console.error('Token not found')
+            return
+        }
+
         axios
-        .post(baseUrl, newTask)
+        .post(baseUrl, newTask, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
         .then(response => {
             setTasks(prevTasks => [...prevTasks, response.data])
             clearFields()
@@ -129,7 +139,6 @@ const Add = () => {
         setTasks(tasks.filter(task => task.id !== taskId))
     }
     
-
     const modifyTask = (modifiedTask) => {
         const updatedTasks = tasks.map(task =>
             task.id === modifiedTask.id ? modifiedTask : task
@@ -139,9 +148,10 @@ const Add = () => {
 
     const acceptTask = (taskId) => {
         const acceptedTask = tasks.find(task => task.id === taskId)
-        if (acceptedTask)
-        {   acceptedTask.status = "In Progress"
+        if (acceptedTask) {
+            acceptedTask.status = "In Progress"
             acceptedTask.assignedTo = user.name
+            console.log("ASSIGNED TO", acceptedTask.assignedTo)
             setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
             axios.put(`${baseUrl}/${taskId}`, acceptedTask)
                 .then(response => {
@@ -224,17 +234,20 @@ const Add = () => {
                                         <b>Task: {task.name}</b><br />
                                         Description: {task.description}<br />
                                         Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span><br/>
+                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status === 'In Progress' ? task.status : task.status}</span><br/>
                                         Assigned to: {task.assignedTo}<br />
                                         Created By: {task.user}<br />
                                         <div>
                                             <TaskOptions
-                                                task={{ ...task, id: task.id }}
+                                                task={{ 
+                                                    ...task, 
+                                                    id: task.id, 
+                                                    user: task.user ? { username: task.user.username, name: task.user.name, id: task.user.id} : null }}
                                                 deleteTask={deleteTask}
                                                 modifyTask={modifyTask}
                                                 acceptTask={acceptTask}
                                                 completeTask={completeTask}
-                                                currentUser={currentUser}
+                                                currentUser={user}
                                             />
                                         </div>
                                     </div>
