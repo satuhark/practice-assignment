@@ -26,7 +26,6 @@ const Modify = ({ task, onModify, user }) => {
     const handleAssignToMe = () => {
         setAssignToMe(true)
         modifiedTask.assignedTo = user.name
-        console.log("MODIFIED ASSIGNED TO:", user.name)
     }
 
     const saveModifiedTask = () => {

@@ -17,6 +17,7 @@ const Add = () => {
     const [buttonText, setButtonText] = useState('Completed Tasks')
     const [user, setUser] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
+    const [currentUser, setCurrentUser] = useState(null)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -233,7 +234,7 @@ const Add = () => {
                                                 modifyTask={modifyTask}
                                                 acceptTask={acceptTask}
                                                 completeTask={completeTask}
-                                                currentUser={user}
+                                                currentUser={currentUser}
                                             />
                                         </div>
                                     </div>
