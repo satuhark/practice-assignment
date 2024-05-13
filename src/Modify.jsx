@@ -9,7 +9,6 @@ const Modify = ({ task, onModify, user }) => {
     const [modifiedTask, setModifiedTask] = useState(task)
     const [showModify, setShowModify] = useState(false)
     const [buttonText, setButtonText] = useState('Modify')
-    const [assignToMe, setAssignToMe] = useState(false)
 
     const toggleEditing = () => {
         setIsEditing(!isEditing)
@@ -24,7 +23,6 @@ const Modify = ({ task, onModify, user }) => {
     }
 
     const handleAssignToMe = () => {
-        setAssignToMe(true)
         modifiedTask.assignedTo = user.name
     }
 
