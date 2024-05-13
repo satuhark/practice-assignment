@@ -111,8 +111,12 @@ const Add = () => {
             description: description,
             deadline: deadline,
             status: "To Do",
+            createdby: user.name,
             user: user.id
         }
+
+        console.log("CREATED BY", user.name)
+        console.log("NEW TASK CREATED BY",newTask.createdby)
 
         const token = localStorage.getItem('token')
         if (!token) {
@@ -233,7 +237,7 @@ const Add = () => {
                                         Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
                                         Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status === 'In Progress' ? task.status : task.status}</span><br/>
                                         Assigned to: {task.assignedTo}<br />
-                                        Created By: {task.user}<br />
+                                        Created By: {task.createdby}<br />
                                         <div>
                                             <TaskOptions
                                                 task={{ 
