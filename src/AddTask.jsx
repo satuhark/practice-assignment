@@ -73,6 +73,19 @@ const Add = () => {
         fetchTasks()
     }, [showHistory])
 
+    useEffect(() => {
+        try { 
+            const storedToken = localStorage.getItem("token")
+            const storedUser = localStorage.getItem("user")
+        if (storedToken && storedUser) {
+          const parsedUser = JSON.parse(storedUser)
+          setUser(parsedUser)
+        } 
+    }   catch (error) {
+            console.error("Error retrieving user from localStorage:", error)
+        }
+      }, [])
+
     const toggleHistory = () => {
         setShowHistory(!showHistory)
         setButtonText(showHistory ? 'Completed Tasks' : 'Hide Completed Tasks')
@@ -112,7 +125,6 @@ const Add = () => {
             deadline: deadline,
             status: "To Do",
             createdby: user.name,
-            user: user.id
         }
 
         const token = localStorage.getItem('token')
@@ -221,7 +233,7 @@ const Add = () => {
                     </div>
                 ) : (
                     <div>
-                        <p>{user.name} logged in {loggedIn && <button onClick={() => { setUser(null); setLoggedIn(false); }}>Logout</button>}</p>
+                        <p>{user.name} logged in {loggedIn && <button onClick={() => { setUser(null); setLoggedIn(false); localStorage.clear(); }}>Logout</button>}</p>
                         {taskForm()}
                         <div>
                             <h2>Tasks</h2>

@@ -15,6 +15,7 @@ const Login = ({ setUser }) => {
                 password,
             })
             localStorage.setItem('token', user.token)
+            localStorage.setItem('user', JSON.stringify(user))
             setUser(user)
             setUsername('')
             setPassword('')
