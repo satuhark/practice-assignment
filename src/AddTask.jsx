@@ -111,7 +111,7 @@ const Add = () => {
             description: description,
             deadline: deadline,
             status: "To Do",
-            user: user
+            user: user.id
         }
 
         const token = localStorage.getItem('token')
@@ -151,7 +151,6 @@ const Add = () => {
         if (acceptedTask) {
             acceptedTask.status = "In Progress"
             acceptedTask.assignedTo = user.name
-            console.log("ASSIGNED TO", acceptedTask.assignedTo)
             setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
             axios.put(`${baseUrl}/${taskId}`, acceptedTask)
                 .then(response => {
@@ -201,8 +200,6 @@ const Add = () => {
         )
 
         const updateUser = (userData) => {
-            console.log("NAME:",userData.name)
-            console.log("Current User:", userData)
             setUser(userData)
         }
 

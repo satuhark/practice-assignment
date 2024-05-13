@@ -9,7 +9,6 @@ const Login = ({ setUser }) => {
     
     const handleLogin = async (event) => {
         event.preventDefault()
-        console.log('Logging in with', username, password)
         try {
             const user = await loginService.login({ 
                 username, 
@@ -36,12 +35,14 @@ return (
             value={username}
             placeholder="Username"
             onChange={({ target }) => setUsername(target.value)}
+            autoComplete="username"
           />
             <input
             type="password"
             value={password}
             placeholder="Password"
             onChange={({ target }) => setPassword(target.value)}
+            autoComplete="current-password"
           />
         <button className="button" type="submit">Login</button>
       </div>

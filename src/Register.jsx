@@ -55,21 +55,25 @@ const Register = () => {
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)} required 
+                    autoComplete="username"
                     placeholder="New username" />
                 <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)} required
+                    autoComplete="username"
                     placeholder="New name" />
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} required
+                    autoComplete="new-password"
                     placeholder="New password" />
                 <input
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)} required
+                    autoComplete="new-password"
                     placeholder="Confirm new password" />
                 {error && <div style={{ color: 'red' }}>{error}</div>}
                 <button className="button" type="submit">Register</button>

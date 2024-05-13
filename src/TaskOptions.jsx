@@ -24,7 +24,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} />
                         <Modify task={task} onModify={modifyTask} user={currentUser} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && !task.assignedTo && (<button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>)}
-                        {(task.assignedTo && task.user.name === currentUser) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
+                        {(task.assignedTo && task.user && task.user.name === currentUser) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
                     </div>
                 )}
                 </span>
