@@ -27,4 +27,4 @@ lähinnä oleva deadline näkyy ekana
 | 08.05.2024 | 8 | Logout function. Fixing errors with modifying/assigning tasks. |
 | 09.05.2024 | 8 | Fixing errors with completing tasks/userID problem. Accidentally created issues with Post. |
 | 4th&5th week | =24 |  |
-| 13.05.2024 | 8 | Fixing errors, fixing little things here and there. |
+| 13.05.2024 | 8 | Fixing errors, fixing little things here and there. User stays logged in for an hour. |
