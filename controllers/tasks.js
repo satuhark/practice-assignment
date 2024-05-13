@@ -40,7 +40,6 @@ tasksRouter.post('/', async (req, res) => {
             status: body.status,
             deadline: body.deadline,
             createdby: body.createdby
-            //user: user.id
           })
         
         const savedTask = await task.save()
