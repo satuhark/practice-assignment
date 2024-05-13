@@ -115,9 +115,6 @@ const Add = () => {
             user: user.id
         }
 
-        console.log("CREATED BY", user.name)
-        console.log("NEW TASK CREATED BY",newTask.createdby)
-
         const token = localStorage.getItem('token')
         if (!token) {
             console.error('Token not found')
