@@ -39,6 +39,7 @@ tasksRouter.post('/', async (req, res) => {
             description: body.description,
             status: body.status,
             deadline: body.deadline,
+            createdby: body.createdby
             //user: user.id
           })
         

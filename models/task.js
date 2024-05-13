@@ -19,6 +19,7 @@ const taskSchema = new mongoose.Schema({
         default: 'To Do'
     },
     assignedTo: String,
+    createdby: String,
     user: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User'
