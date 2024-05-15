@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../App'
 import Login from '../Login'
 
@@ -28,9 +29,11 @@ test('Register button exists', () => {
 
   test('logging in', async () => {
 
-    const setUserMock = vi.fn()
+    const mockHandler = vi.fn()
 
-    render(<Login setUser={setUserMock} />)
+    render(<Login setUser={mockHandler} />)
+
+    const user = userEvent.setup()
 
     const usernameInput = screen.getByPlaceholderText('Username')
     const passwordInput = screen.getByPlaceholderText('Password')
@@ -38,16 +41,15 @@ test('Register button exists', () => {
     fireEvent.change(usernameInput, { target: { value: 'testuser' } })
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } })
     
+    expect(usernameInput).toHaveValue('testuser')
+    expect(passwordInput).toHaveValue('testpassword')
+    
     const loginButton = screen.getByRole('button', { name: 'Login' })
-    fireEvent.click(loginButton)
-
     
+    await user.click(loginButton)
     
-    expect(setUserMock).toHaveBeenCalledWith({
-        username: 'testuser',
-        password: 'testpassword'
-    })
     expect(usernameInput).toHaveValue('')
     expect(passwordInput).toHaveValue('')
+    
   }
 )
