@@ -224,6 +224,12 @@ const Add = () => {
             return `${day}/${month}/${year}`
         }
 
+        const handleLogout = () => {
+            setUser(null)
+            setLoggedIn(false)
+            localStorage.clear()
+        }
+
         return (
             <>
                 {user === null ? (
@@ -233,7 +239,7 @@ const Add = () => {
                     </div>
                 ) : (
                     <div>
-                        <p>{user.name} logged in {loggedIn && <button onClick={() => { setUser(null); setLoggedIn(false); localStorage.clear(); }}>Logout</button>}</p>
+                        <p>{user.name} logged in {<button onClick={handleLogout}>Logout</button>}</p>
                         {taskForm()}
                         <div>
                             <h2>Tasks</h2>
