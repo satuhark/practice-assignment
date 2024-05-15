@@ -47,9 +47,9 @@ test('Register button exists', () => {
     const loginButton = screen.getByRole('button', { name: 'Login' })
     
     await user.click(loginButton)
-    
-    expect(usernameInput).toHaveValue('')
-    expect(passwordInput).toHaveValue('')
+    screen.getByText(`testuser logged in`)
+    /*expect(usernameInput).toHaveValue('')
+    expect(passwordInput).toHaveValue('')*/
     
   }
 )
