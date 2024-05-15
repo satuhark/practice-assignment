@@ -1,5 +1,6 @@
-import { render, screen, test, expect } from '@testing-library/react'
-import App from './App'
+import { render, screen } from '@testing-library/react'
+//import { test } from '@jest/globals'
+import App from '../App'
 
 test('renders content', () => {
   const task = {
@@ -13,6 +14,6 @@ test('renders content', () => {
 
   render(<App task={task} />)
 
-  const element = screen.getByText('Component testing is done with react-testing-library')
-  expect(element).toBeDefined()
+    const buttonElement = screen.getByRole('button', { name: 'Login' });
+    expect(buttonElement).toBeInTheDocument()
 })
