@@ -29,3 +29,4 @@ lähinnä oleva deadline näkyy ekana
 | 4th&5th week | =24 |  |
 | 13.05.2024 | 8 | Fixing errors, fixing little things here and there. User stays logged in for an hour. |
 | 15.05.2024 | 8 | Fixing errors, creating tests. |
+| 16.05.2024 | 4 | Tests for front-end |
