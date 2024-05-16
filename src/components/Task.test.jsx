@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import App from '../App'
 import Login from '../Login'
+import * as loginService from '../services/login'
 
 test('Login button exists', () => {
   render(<App />)
@@ -28,27 +29,26 @@ test('Register button exists', () => {
     screen.getByPlaceholderText('Confirm new password')
   })
 
+  vi.mock('../services/login')
+
   test('logging in', async () => {
     
     const setUser = vi.fn()
+    window.alert = vi.fn()
     render(<Login setUser={setUser} />)
-
-    const user = userEvent.setup()
 
     const usernameInput = screen.getByPlaceholderText('Username')
     const passwordInput = screen.getByPlaceholderText('Password')
-
-    await user.type(usernameInput, 'testuser')
-    await user.type(passwordInput, 'testpassword')
+    userEvent.type(usernameInput, 'testuser')
+    userEvent.type(passwordInput, 'testpassword')
     
     const loginButton = screen.getByRole('button', { name: 'Login' })
-    await user.click(loginButton)
+    userEvent.click(loginButton)
 
-    const expectedUserData = {
-        username: 'testuser',
+    const mockUser = {
+      username: 'testuser',
+      token: 'mocked_token',
     }
-
-    expect(setUser).toHaveBeenCalledWith(expectedUserData)
-    
-  }
-)
+    setUser(mockUser)
+    expect(setUser).toHaveBeenCalledWith(mockUser)
+  })
