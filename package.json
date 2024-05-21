@@ -31,6 +31,7 @@
     "jest-localstorage-mock": "^2.4.26",
     "jsdom": "^24.0.0",
     "json-server": "^1.0.0-alpha.23",
+    "msw": "^2.3.0",
     "vite": "^5.2.0",
     "vitest": "^1.6.0"
   }
