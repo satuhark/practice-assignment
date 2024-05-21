@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
+import { vi } from 'vitest'
 
 
 test('Login fields and button exists', () => {
@@ -49,11 +50,19 @@ test('Logging in works', async () => {
       token: 'mocked_token',
     })
   })
+  
+  screen.debug()
+  
+  const loggedInUser = 'testuser'
+  const createdBy = screen.getByText(`Created By: ${loggedInUser}`)
+  expect(createdBy).toBeInTheDocument()
 
   expect(window.alert).not.toHaveBeenCalled()
   
   vi.resetAllMocks()
 })
+
+
 
 /*test('Task is added and displayed under "Tasks"', async () => {
   render(<App />)
@@ -68,24 +77,25 @@ test('Logging in works', async () => {
   userEvent.click(addTaskButton)
 
   await waitFor(() => {
-    expect(screen.getByText('Test Task 1')).toBeInTheDocument()
-    expect(screen.getByText('Description 1')).toBeInTheDocument()
+    //expect(screen.getByText('Test Task 1')).toBeInTheDocument()
+    //expect(screen.getByText('Description 1')).toBeInTheDocument()
   })
 
   const tasksHeader = screen.getByText('Tasks')
   expect(tasksHeader).toBeInTheDocument()
 
-  const deadline = screen.getByText('deadline')
+  const deadline = screen.getByPlaceholderText('Select deadline')
   expect(deadline).toBeInTheDocument()
 
-  const status = screen.getByText('Status: To Do')
-  expect(status).toBeInTheDocument()
+  //const status = screen.getByText('Status')
+  //expect(status).toBeInTheDocument()
 
-  const createdBy = screen.getByText(`Created By: ${loggedInUser}`)
-  expect(createdBy).toBeInTheDocument()
+  //const createdBy = screen.getByText(`Created By: ${loggedInUser}`)
+  //expect(createdBy).toBeInTheDocument()
 
   const assignedTo = screen.getByText('Assigned To: ')
   expect(assignedTo).toBeInTheDocument()
   
 
-})*/
+})
+*/
