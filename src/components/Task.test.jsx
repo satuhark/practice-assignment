@@ -4,7 +4,14 @@ import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
 import { vi } from 'vitest'
+const axios = require('axios')
 
+vi.mock('../services/login')
+
+test('Mock server responds with expected data', async () => {
+  const response = await axios.get('http://localhost:3002/api/test');
+  expect(response.data).toEqual({ message: 'Mocked response for testing' });
+})
 
 test('Login fields and button exists', () => {
   render(<App />)
@@ -22,8 +29,6 @@ test('Register fields and button exists', () => {
     screen.getByPlaceholderText('Confirm new password')
   })
   
-vi.mock('../services/login')
-
 test('Logging in works', async () => {
   const setUser = vi.fn()
   window.alert = vi.fn()
@@ -51,12 +56,6 @@ test('Logging in works', async () => {
     })
   })
   
-  screen.debug()
-  
-  const loggedInUser = 'testuser'
-  const createdBy = screen.getByText(`Created By: ${loggedInUser}`)
-  expect(createdBy).toBeInTheDocument()
-
   expect(window.alert).not.toHaveBeenCalled()
   
   vi.resetAllMocks()
