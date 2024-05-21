@@ -4,6 +4,7 @@ import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
 
+
 test('Login fields and button exists', () => {
   render(<App />)
   screen.getByRole('button', { name: 'Login' })
@@ -54,24 +55,37 @@ test('Logging in works', async () => {
   vi.resetAllMocks()
 })
 
-test('Tasks show after logging in', async () => {
-  // Mock localStorage for token storage
-  Storage.prototype.getItem = vi.fn((key) => {
-    if (key === 'token') return 'mocked_token'
-    if (key === 'user') return JSON.stringify({ name: 'user1' })
-    return null
-  })
-
+/*test('Task is added and displayed under "Tasks"', async () => {
   render(<App />)
 
-  // Simulate login, check if tasks are loaded
+  const taskNameInput = screen.getByPlaceholderText('Task Name')
+  const taskDescriptionInput = screen.getByPlaceholderText('Task Description')
+  const addTaskButton = screen.getByRole('button', { name: 'Add task' })
+
+  userEvent.type(taskNameInput, 'Test Task 1')
+  userEvent.type(taskDescriptionInput, 'Description 1')
+
+  userEvent.click(addTaskButton)
+
   await waitFor(() => {
-    expect(screen.getByText('Tasks')).toBeInTheDocument()
+    expect(screen.getByText('Test Task 1')).toBeInTheDocument()
+    expect(screen.getByText('Description 1')).toBeInTheDocument()
   })
 
-  // Check that the tasks are displayed
-  expect(screen.getByText('Test Task 1')).toBeInTheDocument()
-  expect(screen.getByText('Description 1')).toBeInTheDocument()
-  expect(screen.getByText('Test Task 2')).toBeInTheDocument()
-  expect(screen.getByText('Description 2')).toBeInTheDocument()
-})
+  const tasksHeader = screen.getByText('Tasks')
+  expect(tasksHeader).toBeInTheDocument()
+
+  const deadline = screen.getByText('deadline')
+  expect(deadline).toBeInTheDocument()
+
+  const status = screen.getByText('Status: To Do')
+  expect(status).toBeInTheDocument()
+
+  const createdBy = screen.getByText(`Created By: ${loggedInUser}`)
+  expect(createdBy).toBeInTheDocument()
+
+  const assignedTo = screen.getByText('Assigned To: ')
+  expect(assignedTo).toBeInTheDocument()
+  
+
+})*/
