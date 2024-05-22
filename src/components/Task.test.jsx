@@ -1,16 +1,23 @@
+import { describe, it, expect } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
-import { vi } from 'vitest'
-const axios = require('axios')
+import axios from 'axios'
 
-vi.mock('../services/login')
+describe('Task Component', () => {
+  it('Mock server responds with expected data', async () => {
+    const response = await axios.post('http://localhost:3002/api/tasks')
+    expect(response.data).toEqual({ message: 'Mocked response for tasks' })
+  })
+})
+
+/*vi.mock('../services/login')
 
 test('Mock server responds with expected data', async () => {
-  const response = await axios.get('http://localhost:3002/api/test');
-  expect(response.data).toEqual({ message: 'Mocked response for testing' });
+  const response = await axios.post('http://localhost:3002/api/test')
+  expect(response.data).toEqual({ message: 'Mocked response for testing' })
 })
 
 test('Login fields and button exists', () => {
@@ -63,7 +70,7 @@ test('Logging in works', async () => {
 
 
 
-/*test('Task is added and displayed under "Tasks"', async () => {
+test('Task is added and displayed under "Tasks"', async () => {
   render(<App />)
 
   const taskNameInput = screen.getByPlaceholderText('Task Name')
