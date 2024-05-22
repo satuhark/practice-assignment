@@ -41,7 +41,36 @@ test('Register fields and button exists', () => {
     screen.getByPlaceholderText('New password')
     screen.getByPlaceholderText('Confirm new password')
   })
-  
+
+vi.mock('../services/login')  
+
+test('Login displays error message for invalid credentials', async () => {
+  const setUser = vi.fn()
+  window.alert = vi.fn()
+
+  loginService.login = vi.fn().mockRejectedValue(new Error('Invalid credentials'))
+
+  render(<Login setUser={setUser} />)
+
+  const usernameInput = screen.getByPlaceholderText('Username')
+  const passwordInput = screen.getByPlaceholderText('Password')
+
+  userEvent.type(usernameInput, 'testuser')
+  userEvent.type(passwordInput, 'invalidpassword')
+
+  const loginButton = screen.getByRole('button', { name: 'Login' })
+  userEvent.click(loginButton)
+
+  await waitFor(() => {
+    expect(screen.getByText('Invalid credentials')).toBeInTheDocument()
+  })
+
+  expect(setUser).not.toHaveBeenCalled()
+  expect(window.alert).not.toHaveBeenCalled()
+
+  vi.clearAllMocks()
+})
+
 test('Logging in works', async () => {
   const setUser = vi.fn()
   window.alert = vi.fn()
@@ -71,10 +100,9 @@ test('Logging in works', async () => {
   
   expect(window.alert).not.toHaveBeenCalled()
   
-  vi.resetAllMocks()
+  vi.clearAllMocks()
 })
 
-vi.mock('../services/login')
 
 test('Task is added and displayed under "Tasks"', async () => {
   render(<App />)
@@ -109,4 +137,29 @@ test('Task is added and displayed under "Tasks"', async () => {
   //expect(assignedTo).toBeInTheDocument()
   
 
+})
+
+test('User can delete a task', async () => {
+  render(<App />)
+
+  const deleteButton = screen.getByRole('button', { name: 'Delete Task' })
+  userEvent.click(deleteButton)
+
+  await waitFor(() => {
+    expect(screen.queryByText('Deleted Task')).toBeNull()
+  })
+})
+
+
+test('Logout button logs the user out', async () => {
+  const setUser = vi.fn()
+
+  render(<App />)
+
+  const logoutButton = screen.getByRole('button', { name: 'Logout' })
+  userEvent.click(logoutButton)
+
+  await waitFor(() => {
+    expect(setUser).toHaveBeenCalledWith(null)
+  })
 })
