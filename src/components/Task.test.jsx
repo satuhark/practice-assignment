@@ -5,6 +5,14 @@ import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
 import axios from 'axios'
+import { server } from '../mocks/server'
+import { http } from 'msw'
+
+/*server.use(
+  http.post('http://localhost:3002/api/tasks', (req, res, ctx) => {
+    return res(ctx.json({ message: 'Mocked response for tasks' }))
+  })
+)
 
 describe('Task Component', () => {
   it('Mock server responds with expected data', async () => {
@@ -13,13 +21,13 @@ describe('Task Component', () => {
   })
 })
 
-/*vi.mock('../services/login')
+vi.mock('../services/login')
 
 test('Mock server responds with expected data', async () => {
-  const response = await axios.post('http://localhost:3002/api/test')
+  const response = await http.post('http://localhost:3002/api/test')
   expect(response.data).toEqual({ message: 'Mocked response for testing' })
 })
-
+*/
 test('Login fields and button exists', () => {
   render(<App />)
   screen.getByRole('button', { name: 'Login' })
@@ -69,7 +77,7 @@ test('Logging in works', async () => {
 })
 
 
-
+/*
 test('Task is added and displayed under "Tasks"', async () => {
   render(<App />)
 

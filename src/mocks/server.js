@@ -3,6 +3,10 @@ import { handlers } from './handlers'
 
 export const server = setupServer(...handlers)
 
-beforeAll(() => server.listen())
+console.log('MSW Server is starting...')
+beforeAll(() => {
+    console.log('Server listening...')
+    server.listen()
+  })
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
