@@ -33,3 +33,5 @@ lähinnä oleva deadline näkyy ekana
 | 6th week | =20 |  |
 | 20.05.2024 | 2 | Studying E2E tests |
 | 21.05.2024 | 8 | Testing for frontend. Trying to find what causes an error. |
+| 22.05.2024 | 5 | Tests for frontend. |
+
