@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event'
 import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
+import DatePicker from '../DatePicking'
 
 vi.mock('../services/login')
 
@@ -30,9 +31,8 @@ describe('App Component', () => {
 
   it('Login displays error message for invalid credentials', async () => {
     const setUser = vi.fn()
-    window.alert = vi.fn()
 
-    loginService.login = vi.fn().mockRejectedValue(new Error('User or password incorrect'))
+    loginService.login = vi.fn().mockRejectedValue({ response: { status: 401 } })
 
     render(<Login setUser={setUser} />)
 
@@ -42,12 +42,10 @@ describe('App Component', () => {
     userEvent.click(screen.getByRole('button', { name: 'Login' }))
 
     await waitFor(() => {
-      console.log('INNER HTML:',document.body.innerHTML)
-      expect(screen.getByText('User or password incorrect')).toBeInTheDocument()
+      expect(screen.getByText('User or password incorrect')).to.exist
     })
 
     expect(setUser).not.toHaveBeenCalled()
-    expect(window.alert).not.toHaveBeenCalled()
   })
 
   it('Logging in works', async () => {
@@ -76,12 +74,21 @@ describe('App Component', () => {
     expect(window.alert).not.toHaveBeenCalled()
   })
 })
-/*
+
   it('Task is added and displayed under "Tasks"', async () => {
     render(<App />)
+    //render(<DatePicker />)
 
     userEvent.type(screen.getByPlaceholderText('Task Name'), 'Test Task 1')
     userEvent.type(screen.getByPlaceholderText('Task Description'), 'Description 1')
+    
+    await waitFor(() => {
+      const deadlineInputs = screen.getAllByPlaceholderText('Select deadline')
+      const deadlineInput = deadlineInputs[0]
+      userEvent.click(deadlineInput)
+      const todayButton = screen.getByText('Today')
+      userEvent.click(todayButton)
+    })
 
     userEvent.click(screen.getByRole('button', { name: 'Add task' }))
 
@@ -90,7 +97,8 @@ describe('App Component', () => {
       expect(screen.getByText('Description 1')).toBeInTheDocument()
     })
   })
-
+  
+/*
   it('User can delete a task', async () => {
     render(<App />)
 

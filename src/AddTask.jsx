@@ -250,9 +250,9 @@ const Add = () => {
                                     <div key={task.id}>
                                         <b>Task: {task.name}</b><br />
                                         Description: {task.description}<br />
-                                        Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status === 'In Progress' ? task.status : task.status}</span><br/>
-                                        Assigned to: {task.assignedTo}<br />
+                                        Deadline: {formatDate(task.deadline)}<br />
+                                        Status: <span className={task.status === 'Overdue' ? 'overdue-status' : ''}>{task.status}</span><br/>
+                                        Assigned to: {task.assignedTo ? task.assignedTo : '' }<br />
                                         Created By: {task.createdby}<br />
                                         <div>
                                             <TaskOptions
