@@ -5,6 +5,7 @@ import App from '../App'
 import Login from '../Login'
 import loginService from '../services/login'
 import DatePicker from '../DatePicking'
+import Add from '../AddTask'
 
 vi.mock('../services/login')
 
@@ -76,9 +77,13 @@ describe('App Component', () => {
 })
 
   it('Task is added and displayed under "Tasks"', async () => {
-    render(<App />)
-    //render(<DatePicker />)
+    const mockTasks = [
+      { id: 1, name: 'Task 1', description: 'Description 1', deadline: '2024-05-25', status: 'To Do', assignedTo: 'User 1', createdby: 'Creator 1' },
+      { id: 2, name: 'Task 2', description: 'Description 2', deadline: '2024-05-26', status: 'In Progress', assignedTo: 'User 2', createdby: 'Creator 2' },
+    ]
 
+    render(<Add sortedTasks={mockTasks}/>)
+    
     userEvent.type(screen.getByPlaceholderText('Task Name'), 'Test Task 1')
     userEvent.type(screen.getByPlaceholderText('Task Description'), 'Description 1')
     
@@ -91,6 +96,8 @@ describe('App Component', () => {
     })
 
     userEvent.click(screen.getByRole('button', { name: 'Add task' }))
+
+    console.log('HTML after adding task:', document.body.innerHTML)
 
     await waitFor(() => {
       expect(screen.getByText('Test Task 1')).toBeInTheDocument()

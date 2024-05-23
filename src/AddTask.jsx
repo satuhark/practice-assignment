@@ -115,7 +115,7 @@ const Add = () => {
         setDeadline(null)
     }
 
-    const addTask = event => {
+    const addTask = async event => {
         event.preventDefault()
         if (!validateInput()) return
         
@@ -134,12 +134,14 @@ const Add = () => {
         }
 
         try {
-            const response = axios.post(baseUrl, newTask, {
+            const response = await axios.post(baseUrl, newTask, {
               headers: {
                 'Authorization': `Bearer ${token}`
               }
             })
+            
             setTasks(prevTasks => [...prevTasks, response.data])
+            await fetchTasks()
             clearFields()
           } catch (error) {
             console.error('Error adding task:', error)
