@@ -1,3 +1,4 @@
+import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import DatePicking from './DatePicking'
@@ -46,7 +47,6 @@ const Add = () => {
                 const currentDate = new Date()
                 const updatedTasks = await Promise.all(tasks.map(async (task) => {
                     const taskDeadline = new Date(task.deadline)
-                    
                     if (areDatesEqual(currentDate, taskDeadline)) {
                         const updatedTask = { ...task, status: 'Due today' }
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
@@ -133,24 +133,27 @@ const Add = () => {
             return
         }
 
-        axios
-        .post(baseUrl, newTask, {
-            headers: {
+        try {
+            const response = axios.post(baseUrl, newTask, {
+              headers: {
                 'Authorization': `Bearer ${token}`
-            }
-        })
-        .then(response => {
+              }
+            })
             setTasks(prevTasks => [...prevTasks, response.data])
             clearFields()
-        })
-        .catch(error => {
+          } catch (error) {
             console.error('Error adding task:', error)
-        }) 
-    }
+          }
+        }
     
-    const deleteTask = (taskId) => {
-        setTasks(tasks.filter(task => task.id !== taskId))
-    }
+    const deleteTask = async (taskId) => {
+        try {
+          await axios.delete(`${baseUrl}/${taskId}`)
+          setTasks(tasks.filter(task => task.id !== taskId))
+        } catch (error) {
+          console.error('Error deleting task:', error)
+        }
+      }
     
     const modifyTask = (modifiedTask) => {
         const updatedTasks = tasks.map(task =>
@@ -159,36 +162,34 @@ const Add = () => {
         setTasks(updatedTasks)
     }
 
-    const acceptTask = (taskId) => {
+    const acceptTask = async (taskId) => {
         const acceptedTask = tasks.find(task => task.id === taskId)
         if (acceptedTask) {
             acceptedTask.status = "In Progress"
             acceptedTask.assignedTo = user.name
-            setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
-            axios.put(`${baseUrl}/${taskId}`, acceptedTask)
-                .then(response => {
-                    console.log('Task status updated successfully:', response.data)
-                })
-                .catch(error => {
-                    console.error('Error updating task status:', error)
-                })
-        }
-    }
+            try {
+                const response = await axios.put(`${baseUrl}/${taskId}`, acceptedTask)
+                setTasks(tasks.map(task => (task.id === taskId ? acceptedTask : task)))
+                console.log('Task status updated successfully:', response.data)
+              } catch (error) {
+                console.error('Error updating task status:', error)
+              }
+            }
+          }
     
-    const completeTask = (taskId) => {
+    const completeTask = async (taskId) => {
         const completedTask = tasks.find(task => task.id === taskId)
         if (completedTask) {
             completedTask.status = "Completed"
-            setTasks(tasks.map(task => (task.id === taskId ? completedTask : task)))
-            axios.put(`${baseUrl}/${taskId}`, completedTask)
-            .then(response => {
+            try {
+                const response = await axios.put(`${baseUrl}/${taskId}`, completedTask)
+                setTasks(tasks.map(task => (task.id === taskId ? completedTask : task)))
                 console.log('Task status updated successfully:', response.data)
-            })
-            .catch(error => {
+              } catch (error) {
                 console.error('Error updating task status:', error)
-            })
-        }
-    }
+              }
+            }
+          }
 
     const taskForm = () => (
         <div className="add-container">

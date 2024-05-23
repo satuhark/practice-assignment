@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.css'
 import loginService from './services/login'
 import PropTypes from 'prop-types'
@@ -6,6 +6,11 @@ import PropTypes from 'prop-types'
 const Login = ({ setUser }) => {
     const [username, setUsername] = useState('') 
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+
+    useEffect(() => {
+        console.log(errorMessage)
+    }, [errorMessage])
     
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -21,7 +26,7 @@ const Login = ({ setUser }) => {
             setPassword('')
         } catch (error) {
             if (error.response && error.response.status === 401) {
-                alert('User or password incorrect')
+                setErrorMessage('User or password incorrect')  
             }
         }
     }
@@ -45,6 +50,7 @@ return (
             onChange={({ target }) => setPassword(target.value)}
             autoComplete="current-password"
           />
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button className="button" type="submit">Login</button>
       </div>
       </form>
