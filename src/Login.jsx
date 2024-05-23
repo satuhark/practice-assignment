@@ -9,8 +9,24 @@ const Login = ({ setUser }) => {
     const [errorMessage, setErrorMessage] = useState('')
 
     useEffect(() => {
-        console.log(errorMessage)
-    }, [errorMessage])
+        const checkTokenExpiry = () => {
+            const token = localStorage.getItem('token')
+            const expiryTime = localStorage.getItem('expiryTime')
+
+            if (token && expiryTime) {
+                const currentTime = new Date().getTime()
+                if (currentTime > parseInt(expiryTime, 10)) {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('expiryTime')
+                    window.location.href = '/login'
+                }
+            }
+        }
+
+        const intervalId = setInterval(checkTokenExpiry, 60000);
+
+        return () => clearInterval(intervalId)
+    }, [])
     
     const handleLogin = async (event) => {
         event.preventDefault()
@@ -19,8 +35,10 @@ const Login = ({ setUser }) => {
                 username, 
                 password,
             })
+            const expiryTime = new Date().getTime() + expiresIn * 1000
             localStorage.setItem('token', user.token)
             localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem('expiryTime', expiryTime.toString())
             setUser(user)
             setUsername('')
             setPassword('')
@@ -30,37 +48,36 @@ const Login = ({ setUser }) => {
             }
         }
     }
-
-return (
-    <div className="add-container">
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-        <div className="input-field">
-            <input
-            type="text"
-            value={username}
-            placeholder="Username"
-            onChange={({ target }) => setUsername(target.value)}
-            autoComplete="username"
-          />
-            <input
-            type="password"
-            value={password}
-            placeholder="Password"
-            onChange={({ target }) => setPassword(target.value)}
-            autoComplete="current-password"
-          />
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <button className="button" type="submit">Login</button>
-      </div>
-      </form>
-      </div>
-    )
-}
+    
+    return (
+        <div className="add-container">
+            <h2>Login</h2>
+            <form onSubmit={handleLogin}>
+            <div className="input-field">
+                <input
+                type="text"
+                value={username}
+                placeholder="Username"
+                onChange={({ target }) => setUsername(target.value)}
+                autoComplete="username"
+                />
+                <input
+                type="password"
+                value={password}
+                placeholder="Password"
+                onChange={({ target }) => setPassword(target.value)}
+                autoComplete="current-password"
+                />
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <button className="button" type="submit">Login</button>
+                </div>
+                </form>
+                </div>
+                )
+            }
 
 Login.propTypes = {
     setUser: PropTypes.func.isRequired,
 }
-
 
 export default Login
