@@ -6,6 +6,13 @@ const User = require('../models/user')
 tasksRouter.get('/', async (req, res) => {
     const tasks = await Task.find({})
         res.status(200).json(tasks)
+        tasks.forEach(task => {
+          console.log('Task:', task)
+          if (!task.description || !task.deadline || !task.status) {
+            console.error('Invalid task found:', task)
+          }
+        })
+        res.json(tasks)
 })
 
 tasksRouter.get('/:id', async (req, res) => {
