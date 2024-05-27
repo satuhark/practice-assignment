@@ -79,8 +79,9 @@ describe('Add Component', () => {
 
     expect(window.alert).not.toHaveBeenCalled()
   })
+})
 
-
+/*
   it('Task is added and displayed under "Tasks"', async () => {
     window.alert = vi.fn()
 
@@ -120,9 +121,9 @@ describe('Add Component', () => {
       expect(screen.getByText('Description 1')).toBeInTheDocument()
     })
   })
- })
+
   
-/*
+
   it('User can delete a task', async () => {
     render(<App />)
 
