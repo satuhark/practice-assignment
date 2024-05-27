@@ -92,26 +92,35 @@ describe('Add Component', () => {
     render(<Add sortedTasks={mockTasks}/>)
 
     fireEvent.click(screen.getByPlaceholderText('Task Name'))
-    userEvent.type(screen.getByPlaceholderText('Task Name'), 'Test Task 1')
-    userEvent.type(screen.getByPlaceholderText('Task Description'), 'Description 1')
-    userEvent.click(screen.getByPlaceholderText('Select deadline'))
+    fireEvent.change(screen.getByPlaceholderText('Task Name'), {
+      target: { value: 'Test Task 1' }
+    })
+    expect(screen.getByPlaceholderText('Task Name').value).toBe('Test Task 1')
 
+
+    fireEvent.click(screen.getByPlaceholderText('Task Description'))
+    fireEvent.change(screen.getByPlaceholderText('Task Description'), {
+      target: { value: 'Description 1'}
+    })
+    expect(screen.getByPlaceholderText('Task Description').value).toBe('Description 1')
+
+
+    userEvent.click(screen.getByPlaceholderText('Select deadline'))
     await waitFor(() => {
       expect(screen.getByText('Today')).to.exist
     })
-
     const currentDateCell = screen.getByText(new Date().getDate().toString())
     userEvent.click(currentDateCell)
     
-    userEvent.click(screen.getByRole('button', { name: 'Add task' }))
+
+    fireEvent.click(screen.getByRole('button', { name: 'Add task' }))
 
     await waitFor(() => {
       expect(screen.getByText('Test Task 1')).toBeInTheDocument()
       expect(screen.getByText('Description 1')).toBeInTheDocument()
     })
-    debug()
   })
-})
+ })
   
 /*
   it('User can delete a task', async () => {

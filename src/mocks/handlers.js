@@ -3,7 +3,7 @@ import { http } from 'msw'
 console.log('Initializing MSW Handlers')
 
 export const handlers = [
-    http.options('http://localhost:3001/api/tasks', (req, res, ctx) => {
+    http.options('http://localhost:3002/api/tasks', (req, res, ctx) => {
         return res(
             ctx.set('Access-Control-Allow-Origin', '*'),
             ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'),
