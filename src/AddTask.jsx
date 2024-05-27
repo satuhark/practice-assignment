@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import DatePicking from './DatePicking'
 import './index.css'
@@ -20,12 +19,25 @@ const Add = () => {
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {
+        const checkTokenExpiry = () => {
         const token = localStorage.getItem('token')
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-            setLoggedIn(true)
+        const expiryTime = localStorage.getItem('expiryTime')
+        
+        if (token && expiryTime) {
+            const currentTime = new Date().getTime()
+            if (currentTime > parseInt(expiryTime, 10)) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('expiryTime')
+                setUser(null)
+                window.location.href = '/login'
+            } 
         }
-    }, [])
+    }
+    
+    const intervalId = setInterval(checkTokenExpiry, 60000)
+    return () => clearInterval(intervalId)
+
+}, [])
     
    const fetchTasks = async () => {
     try {

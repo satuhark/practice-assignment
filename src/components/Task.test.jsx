@@ -73,8 +73,6 @@ describe('Add Component', () => {
       })
     })
 
-    console.log('HTML after logging in:', document.body.innerHTML)
-
     expect(window.alert).not.toHaveBeenCalled()
   })
 })
