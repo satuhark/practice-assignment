@@ -1,5 +1,8 @@
+import React from 'react'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 import { describe, it, expect, vi, afterEach } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, fireEvent, debug } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../App'
 import Login from '../Login'
@@ -9,7 +12,7 @@ import Add from '../AddTask'
 
 vi.mock('../services/login')
 
-describe('App Component', () => {
+describe('Add Component', () => {
   afterEach(() => {
     vi.clearAllMocks()
   })
@@ -72,38 +75,43 @@ describe('App Component', () => {
       })
     })
 
+    console.log('HTML after logging in:', document.body.innerHTML)
+
     expect(window.alert).not.toHaveBeenCalled()
   })
-})
+
 
   it('Task is added and displayed under "Tasks"', async () => {
+    window.alert = vi.fn()
+
     const mockTasks = [
       { id: 1, name: 'Task 1', description: 'Description 1', deadline: '2024-05-25', status: 'To Do', assignedTo: 'User 1', createdby: 'Creator 1' },
       { id: 2, name: 'Task 2', description: 'Description 2', deadline: '2024-05-26', status: 'In Progress', assignedTo: 'User 2', createdby: 'Creator 2' },
     ]
 
     render(<Add sortedTasks={mockTasks}/>)
-    
+
+    fireEvent.click(screen.getByPlaceholderText('Task Name'))
     userEvent.type(screen.getByPlaceholderText('Task Name'), 'Test Task 1')
     userEvent.type(screen.getByPlaceholderText('Task Description'), 'Description 1')
-    
+    userEvent.click(screen.getByPlaceholderText('Select deadline'))
+
     await waitFor(() => {
-      const deadlineInputs = screen.getAllByPlaceholderText('Select deadline')
-      const deadlineInput = deadlineInputs[0]
-      userEvent.click(deadlineInput)
-      const todayButton = screen.getByText('Today')
-      userEvent.click(todayButton)
+      expect(screen.getByText('Today')).to.exist
     })
 
+    const currentDateCell = screen.getByText(new Date().getDate().toString())
+    userEvent.click(currentDateCell)
+    
     userEvent.click(screen.getByRole('button', { name: 'Add task' }))
-
-    console.log('HTML after adding task:', document.body.innerHTML)
 
     await waitFor(() => {
       expect(screen.getByText('Test Task 1')).toBeInTheDocument()
       expect(screen.getByText('Description 1')).toBeInTheDocument()
     })
+    debug()
   })
+})
   
 /*
   it('User can delete a task', async () => {
@@ -135,113 +143,7 @@ describe('App Component', () => {
 
 
 
-/*import { describe, it, expect } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import App from '../App'
-import Login from '../Login'
-import loginService from '../services/login'
-import axios from 'axios'
-import { server } from '../mocks/server'
-import { http } from 'msw'
-
-
-
-server.use(
-  http.post('http://localhost:3002/api/tasks', (req, res, ctx) => {
-    return res(ctx.json({ message: 'Mocked response for tasks' }))
-  })
-)
-
-describe('Task Component', () => {
-  it('Mock server responds with expected data', async () => {
-    const response = await axios.post('http://localhost:3002/api/tasks')
-    expect(response.data).toEqual({ message: 'Mocked response for tasks' })
-  })
-})
-
-test('Mock server responds with expected data', async () => {
-  const response = await http.post('http://localhost:3002/api/test')
-  expect(response.data).toEqual({ message: 'Mocked response for testing' })
-})
-
-
-test('Login fields and button exists', () => {
-  render(<App />)
-  screen.getByRole('button', { name: 'Login' })
-  screen.getByPlaceholderText('Username')
-  screen.getByPlaceholderText('Password')
-})
-
-test('Register fields and button exists', () => {
-    render(<App />)
-    screen.getByRole('button', { name: 'Register' })
-    screen.getByPlaceholderText('New username')
-    screen.getByPlaceholderText('New name')
-    screen.getByPlaceholderText('New password')
-    screen.getByPlaceholderText('Confirm new password')
-  })
-
-vi.mock('../services/login')  
-
-test('Login displays error message for invalid credentials', async () => {
-  const setUser = vi.fn()
-  window.alert = vi.fn()
-
-  loginService.login = vi.fn().mockRejectedValue(new Error('Invalid credentials'))
-
-  render(<Login setUser={setUser} />)
-
-  const usernameInput = screen.getByPlaceholderText('Username')
-  const passwordInput = screen.getByPlaceholderText('Password')
-
-  userEvent.type(usernameInput, 'testuser')
-  userEvent.type(passwordInput, 'invalidpassword')
-
-  const loginButton = screen.getByRole('button', { name: 'Login' })
-  userEvent.click(loginButton)
-
-  await waitFor(() => {
-    expect(screen.getByText('Invalid credentials')).toBeInTheDocument()
-  })
-
-  expect(setUser).not.toHaveBeenCalled()
-  expect(window.alert).not.toHaveBeenCalled()
-
-  vi.clearAllMocks()
-})
-
-test('Logging in works', async () => {
-  const setUser = vi.fn()
-  window.alert = vi.fn()
-
-  loginService.login = vi.fn().mockResolvedValue({
-    username: 'testuser',
-    token: 'mocked_token',
-  })
-
-  render(<Login setUser={setUser} />)
-
-  const usernameInput = screen.getByPlaceholderText('Username')
-  const passwordInput = screen.getByPlaceholderText('Password')
-    
-  userEvent.type(usernameInput, 'testuser')
-  userEvent.type(passwordInput, 'testpassword')
-    
-  const loginButton = screen.getByRole('button', { name: 'Login' })
-  userEvent.click(loginButton)
-
-  await waitFor(() => {
-    expect(setUser).toHaveBeenCalledWith({
-      username: 'testuser',
-      token: 'mocked_token',
-    })
-  })
-  
-  expect(window.alert).not.toHaveBeenCalled()
-  
-  vi.clearAllMocks()
-})
+/*
 
 
 test('Task is added and displayed under "Tasks"', async () => {

@@ -3,6 +3,8 @@ import './index.css'
 import loginService from './services/login'
 import PropTypes from 'prop-types'
 
+const expiresIn = 3600
+
 const Login = ({ setUser }) => {
     const [username, setUsername] = useState('') 
     const [password, setPassword] = useState('')
@@ -23,7 +25,7 @@ const Login = ({ setUser }) => {
             }
         }
 
-        const intervalId = setInterval(checkTokenExpiry, 60000);
+        const intervalId = setInterval(checkTokenExpiry, 60000)
 
         return () => clearInterval(intervalId)
     }, [])
