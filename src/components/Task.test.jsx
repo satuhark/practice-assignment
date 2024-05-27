@@ -1,6 +1,4 @@
 import React from 'react'
-import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, waitFor, fireEvent, debug } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
