@@ -35,5 +35,5 @@ lähinnä oleva deadline näkyy ekana
 | 21.05.2024 | 8 | Testing for frontend. Trying to find what causes an error for msw tests. |
 | 22.05.2024 | 5 | Tests for frontend. |
 | 23.05.2024 | 5 | Tests for frontend. Automatic logout when token is expired. Adjust error message when wrong credentials. |
-| 27.05.2024 | 8 | Tests for frontend. |
+| 27.05.2024 | 8 | Tests for frontend & starting to fix backend tests. |
 
