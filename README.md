@@ -36,6 +36,6 @@ lähinnä oleva deadline näkyy ekana
 | 23.05.2024 | 5 | Tests for frontend. Automatic logout when token is expired. Adjust error message when wrong credentials. |
 | 27.05.2024 | 8 | Tests for frontend & starting to fix backend tests. |
 | 7th & 8th week | =26 |  |
-| 03.06.2024 | 8 | Fixing backend tests, staetind E2E tests. |
+| 03.06.2024 | 8 | Fixing backend tests, starting E2E tests. |
 | TOTAL HOURS | 162 | end of 8th week |
 
