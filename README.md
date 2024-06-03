@@ -31,9 +31,11 @@ lähinnä oleva deadline näkyy ekana
 | 15.05.2024 | 8 | Fixing errors, creating tests. |
 | 16.05.2024 | 4 | Tests for front-end |
 | 6th week | =20 |  |
-| 20.05.2024 | 2 | Studying E2E tests |
 | 21.05.2024 | 8 | Testing for frontend. Trying to find what causes an error for msw tests. |
 | 22.05.2024 | 5 | Tests for frontend. |
 | 23.05.2024 | 5 | Tests for frontend. Automatic logout when token is expired. Adjust error message when wrong credentials. |
 | 27.05.2024 | 8 | Tests for frontend & starting to fix backend tests. |
+| 7th & 8th week | =26 |  |
+| 03.06.2024 | 8 | Fixing backend tests. |
+| TOTAL HOURS | 170 |  |
 
