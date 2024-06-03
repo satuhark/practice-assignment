@@ -75,7 +75,7 @@ describe('Adding tasks', () => {
     const initialTasks = await helper.tasksInDb()
 
       const newTask = {
-          name: 'async/await simplifies making async calls',
+          name: 'name',
           description: "jdsks",
           deadline: "22.04.2024",
           status: "To Do",
@@ -92,7 +92,7 @@ describe('Adding tasks', () => {
           const tasksAtEnd = await helper.tasksInDb()
           assert.strictEqual(tasksAtEnd.length, initialTasks.length + 1)
           const names = tasksAtEnd.map(n => n.name)
-          assert(names.includes('async/await simplifies making async calls'))
+          assert(names.includes('name'))
       })
 
   test('task without name is not added', async () => {
@@ -127,7 +127,7 @@ describe('Returning tasks', () => {
     const token = loginResponse.body.token
 
     const newTask = {
-      name: 'async/await simplifies making async calls',
+      name: 'name',
       description: "jdsks",
       deadline: "22.04.2024",
       status: "To Do",
@@ -152,15 +152,13 @@ describe('Returning tasks', () => {
     test('a specific task is within the returned tasks', async () => {
       const response = await api.get('/api/tasks')
         const names = response.body.map(r => r.name)
-        assert(names.includes('async/await simplifies making async calls'))
+        assert(names.includes('name'))
     })
 })
 
 after(async () => {
   await mongoose.connection.close()
 })
-
-/*
 
 
 describe('Viewing and deleting', () => {
@@ -183,10 +181,11 @@ describe('Viewing and deleting', () => {
         const tasksAtEnd = await helper.tasksInDb()
         const names = tasksAtEnd.map(r => r.name)
         assert(!names.includes(taskToDelete.name))
-        assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length - 1)
+        assert.strictEqual(tasksAtEnd.length, tasksAtStart.length - 1)
   })
 })
 
+/*
 describe('when there is initially one user in db', () => {
     beforeEach(async () => {
       await User.deleteMany({})
