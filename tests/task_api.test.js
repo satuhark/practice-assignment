@@ -9,68 +9,158 @@ const helper = require('./test_helper')
 const Task = require('../models/task')
 const User = require('../models/user')
 
+describe('User registration and login', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+  })
 
+  test('a valid user can be created', async () => {
+    const newUser = {
+      username: "test",
+      name: "test",
+      password: "test"
+    }
 
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
 
-describe('Returning tasks', () => {
-    test('tasks are returned as json', async () => {
-        const response = await api.get('/api/tasks')
-        assert.strictEqual(response.status, 200)
+    const usersAtEnd = await helper.usersInDb()
+    assert.strictEqual(usersAtEnd.length, 1)
+    const usernames = usersAtEnd.map(u => u.username)
+    assert(usernames.includes(newUser.username))
+  })
+
+  test('user can log in with correct credentials', async () => {
+    const newUser = {
+      username: "test",
+      name: "test",
+      password: "test"
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const loginResponse = await api
+      .post('/api/login')
+      .send({ username: "test", password: "test" })
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+
+    assert(loginResponse.body.token)
+  })
+})
+
+describe('Adding tasks', () => {
+  let token = ''
+  beforeEach(async () => {
+    await User.deleteMany({})
+    await Task.deleteMany({})
+    
+    await api.post('/api/users').send({ username: "test", name: "test", password: "test" })
+    
+    const loginResponse = await api
+    .post('/api/login')
+    .send({ username: "test", password: "test" })
+  
+  token = loginResponse.body.token
+})
+
+  test('a valid task can be added ', async () => {
+    const initialTasks = await helper.tasksInDb()
+
+      const newTask = {
+          name: 'async/await simplifies making async calls',
+          description: "jdsks",
+          deadline: "22.04.2024",
+          status: "To Do",
+          userId: ""
+      }
+
+      await api
+          .post('/api/tasks')
+          .set('Authorization', `Bearer ${token}`)
+          .send(newTask)
+          .expect(201)
+          .expect('Content-Type', /application\/json/)
+
+          const tasksAtEnd = await helper.tasksInDb()
+          assert.strictEqual(tasksAtEnd.length, initialTasks.length + 1)
+          const names = tasksAtEnd.map(n => n.name)
+          assert(names.includes('async/await simplifies making async calls'))
       })
 
+  test('task without name is not added', async () => {
+    const initialTasks = await helper.tasksInDb()
+    
+    const newTask = {
+          description: "jdsks",
+      }
+
+      await api
+          .post('/api/tasks')
+          .set('Authorization', `Bearer ${token}`)
+          .send(newTask)
+          .expect(400)
+          
+          const tasksAtEnd = await helper.tasksInDb()
+          assert.strictEqual(tasksAtEnd.length, initialTasks.length)
+  })
+})
+
+describe('Returning tasks', () => {
+  beforeEach(async () => {
+    await User.deleteMany({})
+    await Task.deleteMany({})
+    
+    await api.post('/api/users').send({ username: "test", name: "test", password: "test" })
+    
+    const loginResponse = await api
+      .post('/api/login')
+      .send({ username: "test", password: "test" })
+  
+    const token = loginResponse.body.token
+
+    const newTask = {
+      name: 'async/await simplifies making async calls',
+      description: "jdsks",
+      deadline: "22.04.2024",
+      status: "To Do",
+      userId: ""
+    }
+
+    await api
+      .post('/api/tasks')
+      .set('Authorization', `Bearer ${token}`)
+      .send(newTask)
+      .expect(201)
+  })
+
+    test('tasks are returned as json', async () => {
+      await api
+        .get('/api/tasks')
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+      })
+
+
     test('a specific task is within the returned tasks', async () => {
-        const response = await api.get('/api/tasks')
-        console.log(response.body)
+      const response = await api.get('/api/tasks')
         const names = response.body.map(r => r.name)
-        assert(names.includes('Hei'))
+        assert(names.includes('async/await simplifies making async calls'))
     })
+})
+
+after(async () => {
+  await mongoose.connection.close()
 })
 
 /*
-describe('Adding tasks', () => {
-    let token = ''
-    beforeEach(async () => {
-        const loginResponse = await api
-            .post('/api/login')
-            .send({ username: "satu", password: "satu" })
-            console.log("LOGIN RESPONSE:", loginResponse.body)
-            token = loginResponse.body.token
-            console.log("TOKEN:", token)
-    })
-
-    test('a valid task can be added ', async () => {
-        const newTask = {
-            name: 'async/await simplifies making async calls',
-            description: "jdsks",
-            deadline: "22.04.2024",
-            status: "To Do",
-            userId: ""
-        }
-        await api
-            .post('/api/tasks')
-            .set('Authorization', `Bearer ${token}`)
-            .send(newTask)
-            .expect(201)
-            .expect('Content-Type', /application\/json/)
-            const tasksAtEnd = await helper.tasksInDb()
-            assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length + 1)
-            const names = tasksAtEnd.map(n => n.name)
-            assert(names.includes('async/await simplifies making async calls'))
-        })
-  
-    test('task without name is not added', async () => {
-        const newTask = {
-            description: "jdsks",
-        }
-        await api
-            .post('/api/tasks')
-            .set('Authorization', `Bearer ${token}`)
-            .send(newTask)
-            .expect(400)
-            const tasksAtEnd = await helper.tasksInDb()
-            assert.strictEqual(tasksAtEnd.length, helper.initialTasks.length)
-    })
-})
 
 
 describe('Viewing and deleting', () => {
