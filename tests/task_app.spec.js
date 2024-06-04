@@ -1,3 +1,4 @@
+//require('dotenv').config()
 const { test, describe, expect, beforeEach} = require('@playwright/test')
 
 describe('Task app', () => {
@@ -11,10 +12,10 @@ describe('Task app', () => {
   })
 
   test('new user can be created', async ({ page }) => {
-    await page.getByTestId('newusername').fill('test3')
-    await page.getByTestId('newname').fill('test3')
-    await page.getByTestId('newpassword').fill('test3')
-    await page.getByTestId('confirmnewpassword').fill('test3')
+    await page.getByTestId('newusername').fill('test4')
+    await page.getByTestId('newname').fill('test4')
+    await page.getByTestId('newpassword').fill('test4')
+    await page.getByTestId('confirmnewpassword').fill('test4')
 
     await page.getByRole('button', { name: 'register' }).click()
 
@@ -22,8 +23,8 @@ describe('Task app', () => {
   })
   
   test('login form can be opened', async ({ page }) => {
-    await page.getByTestId('username').fill('test2')
-    await page.getByTestId('password').fill('test2')
+    await page.getByTestId('username').fill('test4')
+    await page.getByTestId('password').fill('test4')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('test logged in')).toBeVisible()
