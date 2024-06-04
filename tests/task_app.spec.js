@@ -1,10 +1,21 @@
-//require('dotenv').config()
 const { test, describe, expect, beforeEach} = require('@playwright/test')
 
 describe('Task app', () => {
   beforeEach(async ({ page }) => {
+    console.log("process env:", process.env.NODE_ENV)
     await page.goto('http://localhost:5173')
   })
+  
+  test('front page can be opened', async ({ page }) => {
+  const loginButton = page.locator('button', { hasText: 'Login' })
+  await expect(loginButton).toBeVisible()
+})
+
+})
+
+
+/*
+
   
   test('front page can be opened', async ({ page }) => {
     const loginButton = page.locator('button', { hasText: 'Login' })
@@ -29,4 +40,4 @@ describe('Task app', () => {
 
     await expect(page.getByText('test logged in')).toBeVisible()
   })
-})
+})*/

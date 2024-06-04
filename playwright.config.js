@@ -1,4 +1,3 @@
-require('dotenv').config()
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
 
@@ -15,10 +14,6 @@ module.exports = defineConfig({
   fullyParallel: false,
   workers: 1,
   testDir: './tests',
-  use: {
-    baseURL: 'http://localhost:5173',
-  },
-  globalSetup: require.resolve('./global-setup.js'),
   /* Run tests in files in parallel */
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -73,12 +68,6 @@ module.exports = defineConfig({
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
   ],
-
-  webServer: {
-    command: 'npm start',
-    url: 'http://localhost:3001',
-    reuseExistingServer: !process.env.CI,
-  },
 
   /* Run your local dev server before starting the tests */
   // webServer: {

@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=test node \"C:/Users/satum/Practice Assignment Backend/index.js\"",
     "test": "playwright test",
-    "test:report": "playwright show-report",
-    "start:test": "cross-env NODE_ENV=test node \"C:/Users/satum/Practice Assignment Backend/index.js\""
+    "test:report": "playwright show-report"
   },
   "keywords": [],
   "author": "",
