@@ -1,5 +1,5 @@
 const dotenv = require('dotenv')
-const config = require('../utils/config')
+//const config = require('../utils/config')
 
 dotenv.config({ path: '.env.test' })
 
@@ -16,9 +16,6 @@ describe('Task app', () => {
   await expect(loginButton).toBeVisible()
 })
 
-})
-
-/*
   test('new user can be created', async ({ page }) => {
     await page.getByTestId('newusername').fill('test4')
     await page.getByTestId('newname').fill('test4')
@@ -29,8 +26,8 @@ describe('Task app', () => {
 
     await expect(page.getByText('User created successfully, you can now log in using the login form.')).toBeVisible()
   })
-
-
+})
+/*
   
   test('login form can be opened', async ({ page }) => {
     await page.getByTestId('username').fill('test4')
