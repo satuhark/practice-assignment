@@ -14,10 +14,10 @@ describe('Task app', () => {
   })
 
   test('new user can be created', async ({ page }) => {
-    await page.getByTestId('newusername').fill('test2')
-    await page.getByTestId('newname').fill('test2')
-    await page.getByTestId('newpassword').fill('test2')
-    await page.getByTestId('confirmnewpassword').fill('test2')
+    await page.getByTestId('newusername').fill('test3')
+    await page.getByTestId('newname').fill('test3')
+    await page.getByTestId('newpassword').fill('test3')
+    await page.getByTestId('confirmnewpassword').fill('test3')
 
     await page.getByRole('button', { name: 'register' }).click()
 
