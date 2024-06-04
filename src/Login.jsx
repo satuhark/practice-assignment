@@ -57,6 +57,7 @@ const Login = ({ setUser }) => {
             <form onSubmit={handleLogin}>
             <div className="input-field">
                 <input
+                data-testid='username'
                 type="text"
                 value={username}
                 placeholder="Username"
@@ -64,6 +65,7 @@ const Login = ({ setUser }) => {
                 autoComplete="username"
                 />
                 <input
+                data-testid='password'
                 type="password"
                 value={password}
                 placeholder="Password"

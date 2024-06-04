@@ -136,8 +136,7 @@ const Add = () => {
             description: description,
             deadline: deadline,
             status: "To Do",
-            createdby: user.name,
-            assignedTo: ''
+            createdby: user.name        
         }
 
         const token = localStorage.getItem('token')

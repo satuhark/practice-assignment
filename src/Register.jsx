@@ -9,12 +9,13 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
         if (password !== confirmPassword) {
-            alert('Passwords do not match')
+            setErrorMessage('Passwords do not match')
             setPassword('')
             setConfirmPassword('')
             return
@@ -27,6 +28,8 @@ const Register = () => {
                 password
             })
             console.log('User created successfully:', response.data)
+            setErrorMessage('User created successfully, you can now log in using the login form.')
+
             setUsername('')
             setName('')
             setPassword('')
@@ -36,7 +39,7 @@ const Register = () => {
             if (error.response.status === 400) {
                 const errorMessage = error.response.data.error
                 if (errorMessage.includes('expected `username` to be unique')) {
-                    alert('Username is already in use. Choose another username.')
+                    setErrorMessage('Username is already in use. Choose another username.')
                 } else {
                     setError('An error occurred while registering.')
                 }
@@ -53,30 +56,35 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
             <div className="input-field">
                 <input
+                    data-testid='newusername'
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)} required 
                     autoComplete="username"
                     placeholder="New username" />
                 <input
+                    data-testid='newname'
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)} required
                     autoComplete="username"
                     placeholder="New name" />
                 <input
+                    data-testid='newpassword'
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)} required
                     autoComplete="new-password"
                     placeholder="New password" />
                 <input
+                    data-testid='confirmnewpassword'
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)} required
                     autoComplete="new-password"
                     placeholder="Confirm new password" />
                 {error && <div style={{ color: 'red' }}>{error}</div>}
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <button className="button" type="submit">Register</button>
                 </div>
             </form>
