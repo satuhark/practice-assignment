@@ -11,17 +11,6 @@ describe('Task app', () => {
   await expect(loginButton).toBeVisible()
 })
 
-})
-
-
-/*
-
-  
-  test('front page can be opened', async ({ page }) => {
-    const loginButton = page.locator('button', { hasText: 'Login' })
-    await expect(loginButton).toBeVisible()
-  })
-
   test('new user can be created', async ({ page }) => {
     await page.getByTestId('newusername').fill('test4')
     await page.getByTestId('newname').fill('test4')
@@ -32,7 +21,9 @@ describe('Task app', () => {
 
     await expect(page.getByText('User created successfully, you can now log in using the login form.')).toBeVisible()
   })
-  
+
+})
+  /*
   test('login form can be opened', async ({ page }) => {
     await page.getByTestId('username').fill('test4')
     await page.getByTestId('password').fill('test4')
