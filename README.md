@@ -37,5 +37,6 @@ lähinnä oleva deadline näkyy ekana
 | 27.05.2024 | 8 | Tests for frontend & starting to fix backend tests. |
 | 7th & 8th week | =26 |  |
 | 03.06.2024 | 6 | Fixing backend tests, starting E2E tests. |
+| 04.06.2024 | 6 | E2E tests. |
 | TOTAL HOURS | 162 | end of 8th week |
 
