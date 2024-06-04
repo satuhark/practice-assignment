@@ -1,10 +1,7 @@
-import { beforeEach } from '@playwright/test'
-
-const { test, describe, expect } = require('@playwright/test')
+const { test, describe, expect, beforeEach} = require('@playwright/test')
 
 describe('Task app', () => {
   beforeEach(async ({ page }) => {
-    console.log('NODE_ENV:', process.env.NODE_ENV)
     await page.goto('http://localhost:5173')
   })
   
