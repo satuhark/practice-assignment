@@ -6,7 +6,7 @@ import Modify from './Modify'
 import './index.css'
 
 
-const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, currentUser }) => {
+const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, currentUser, tasks, setTasks }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [showOptions, setShowOptions] = useState(false)
     const [buttonText, setButtonText] = useState('Options')
@@ -15,6 +15,16 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, c
         setIsOpen(!isOpen)
         setShowOptions(!showOptions)
         setButtonText(showOptions ? 'Options' : 'Hide Options')
+    }
+
+    const completeTask = (taskId) => {
+        const updatedTasks = tasks.map(task => {
+            if (task.id === taskId) {
+                return { ...task, status: "Completed" }
+            }
+            return task
+        })
+            setTasks(updatedTasks)
     }
 
     return (

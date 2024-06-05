@@ -270,6 +270,8 @@ const Add = () => {
                                         Created By: {task.createdby}<br />
                                         <div>
                                             <TaskOptions
+                                                tasks={tasks}
+                                                setTasks={setTasks}
                                                 task={{ 
                                                     ...task, 
                                                     id: task.id, 
