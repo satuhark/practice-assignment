@@ -45,6 +45,6 @@ Tasks are sorted so that the nearest deadline is first on the list. Red "Overdue
 | 7th & 8th week | =26 |  |
 | 03.06.2024 | 6 | Fixing backend tests, starting E2E tests. |
 | 04.06.2024 | 6 | E2E tests. |
-| 05.06.2024 | 6 | E2E tests, fixing errors. |
+| 05.06.2024 | 6 | E2E tests, fixing errors, writing user guide. |
 | TOTAL HOURS | 162 | end of 8th week |
 
