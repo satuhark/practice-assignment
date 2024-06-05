@@ -29,7 +29,7 @@ app.use(middleware.requestLogger)
 app.use('/api/tasks', tasksRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
-app.use('/api/register', registerRouter)
+app.use('/api/login', registerRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
