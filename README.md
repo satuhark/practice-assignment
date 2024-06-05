@@ -1,9 +1,16 @@
 ### Link to the app
 
 ### Short description of the app
+App for creating tasks and monitoring the state of them. 
 
 ### User guide
-lähinnä oleva deadline näkyy ekana
+First you see a page with Login and Register. If you don't have a username and password, start by registering and after that log in. 
+
+After logging in you see a form for creating new tasks, and a list of current tasks with their details.
+By clicking 'Options' you can delete or modify the task. You can modify the task name, description, deadline and status. You can assign the task to yourself. After modification click "Save". 
+You can only complete tasks that are assigned to you. 
+
+Tasks are sorted so that the nearest deadline is first on the list. Red "Overdue" status appears for overdue tasks. Once a task is marked "completed", it will automatically move under "Completed tasks" (find "Completed tasks" behind a button at the end of the task list).
 
 ### Hour logging 
 | Date | Hours | What was done |
@@ -38,5 +45,6 @@ lähinnä oleva deadline näkyy ekana
 | 7th & 8th week | =26 |  |
 | 03.06.2024 | 6 | Fixing backend tests, starting E2E tests. |
 | 04.06.2024 | 6 | E2E tests. |
+| 05.06.2024 | 6 | E2E tests, fixing errors. |
 | TOTAL HOURS | 162 | end of 8th week |
 
