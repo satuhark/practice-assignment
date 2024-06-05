@@ -12,6 +12,8 @@ You can only complete tasks that are assigned to you.
 
 Tasks are sorted so that the nearest deadline is first on the list. Red "Overdue" status appears for overdue tasks. Once a task is marked "completed", it will automatically move under "Completed tasks" (find "Completed tasks" behind a button at the end of the task list).
 
+After 1 hour automatically logged out.
+
 ### Hour logging 
 | Date | Hours | What was done |
 |----------|----------|----------|
