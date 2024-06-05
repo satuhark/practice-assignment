@@ -56,8 +56,14 @@ tasksRouter.post('/', async (req, res) => {
 })
 
 tasksRouter.put('/:id', async (req, res) => {
+        const { id } = req.params
         const body = req.body
-        const updatedTask = await Task.findByIdAndUpdate(req.params.id, body, { new: true })
+        const existingTask = await Task.findById(id)
+        existingTask.name = body.name || existingTask.name
+        existingTask.description = body.description || existingTask.description
+        existingTask.status = body.status || existingTask.status
+        existingTask.deadline = body.deadline || existingTask.deadline
+        const updatedTask = await existingTask.save()
         res.json(updatedTask)
 })
 
