@@ -19,11 +19,8 @@ const Delete = ({name, id, onDelete }) => {
           .then(response => {
             console.log('Task deleted successfully:', response.data)
         })
-        .catch(error => {
-            console.error('Error deleting task:', error)
-        })
-          }
       }
+    }
 
       return (
         <button className="delete-button" onClick={confirmDeleteTask}>Delete task</button>
