@@ -1,8 +1,3 @@
-const dotenv = require('dotenv')
-//const config = require('../utils/config')
-
-dotenv.config({ path: '.env.test' })
-
 const { test, describe, expect, beforeEach} = require('@playwright/test')
 
 describe('Task app', () => {
