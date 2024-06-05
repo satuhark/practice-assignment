@@ -12,23 +12,23 @@ describe('Task app', () => {
 })
 
   test('new user can be created', async ({ page }) => {
-    await page.getByTestId('newusername').fill('test4')
-    await page.getByTestId('newname').fill('test4')
-    await page.getByTestId('newpassword').fill('test4')
-    await page.getByTestId('confirmnewpassword').fill('test4')
+    await page.getByTestId('newusername').fill('test')
+    await page.getByTestId('newname').fill('test')
+    await page.getByTestId('newpassword').fill('test')
+    await page.getByTestId('confirmnewpassword').fill('test')
 
     await page.getByRole('button', { name: 'register' }).click()
 
     await expect(page.getByText('User created successfully, you can now log in using the login form.')).toBeVisible()
   })
-})
-/*
-  
-  test('login form can be opened', async ({ page }) => {
-    await page.getByTestId('username').fill('test4')
-    await page.getByTestId('password').fill('test4')
+
+  test('log in works and tasks are displayed after logging in', async ({ page }) => {
+    await page.getByTestId('username').fill('test')
+    await page.getByTestId('password').fill('test')
     await page.getByRole('button', { name: 'login' }).click()
 
     await expect(page.getByText('test logged in')).toBeVisible()
+    await expect(page.locator('h2:has-text("Tasks")')).toBeVisible() 
+    
   })
-})*/
+})
