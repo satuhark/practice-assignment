@@ -6,7 +6,7 @@ import Modify from './Modify'
 import './index.css'
 
 
-const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, currentUser, tasks, setTasks }) => {
+const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, completeTask, currentUser, tasks, setTasks }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [showOptions, setShowOptions] = useState(false)
     const [buttonText, setButtonText] = useState('Options')
@@ -17,23 +17,13 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, currentUser, ta
         setButtonText(showOptions ? 'Options' : 'Hide Options')
     }
 
-    const completeTask = (taskId) => {
-        const updatedTasks = tasks.map(task => {
-            if (task.id === taskId) {
-                return { ...task, status: "ompleted" }
-            }
-            return task
-        })
-            setTasks(updatedTasks)
-    }
-
     return (
         <span className="button-container">
                 <button className="options-button" onClick={toggleDropdown}>{buttonText}</button>
                 {isOpen && (
                     <div className="options-dropdown">
                         <Delete id={task.id} name={task.name} onDelete={deleteTask} tasks={tasks} setTasks={setTasks} />
-                        <Modify task={task} onModify={modifyTask} user={currentUser} />
+                        <Modify task={task} onModify={modifyTask} user={currentUser} assignedTo={task.assignedTo} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && !task.assignedTo && (<button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>)}
                         {(task.assignedTo && task.assignedTo === currentUser.name) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
                     </div>

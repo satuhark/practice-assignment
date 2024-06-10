@@ -59,11 +59,11 @@ const Add = () => {
                 const currentDate = new Date()
                 const updatedTasks = await Promise.all(tasks.map(async (task) => {
                     const taskDeadline = new Date(task.deadline)
-                    if (areDatesEqual(currentDate, taskDeadline)) {
+                    if (areDatesEqual(currentDate, taskDeadline) && task.status !== 'Completed') {
                         const updatedTask = { ...task, status: 'Due today' }
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
                         return updatedTask
-                    } else if (currentDate > taskDeadline) {
+                    } else if ((currentDate > taskDeadline) && task.status !== 'Completed' ){
                         const updatedTask = { ...task, status: 'Overdue' }
                         await axios.put(`${baseUrl}/${task.id}`, updatedTask)
                         return updatedTask
@@ -296,18 +296,7 @@ const Add = () => {
                                             <div key={task.id}>
                                                 <b>Task: {task.name}</b><br />
                                                 Description: {task.description}<br />
-                                                Deadline: {task.deadline ? formatDate(task.deadline) : 'No deadline'}<br />
-                                                Status: {task.status}<br/>
-                                                Created By: {task.user}<br/>
-                                                <div>
-                                                    <TaskOptions
-                                                        task={{ ...task, id: task.id }}
-                                                        deleteTask={deleteTask}
-                                                        modifyTask={modifyTask}
-                                                        acceptTask={acceptTask}
-                                                        completeTask={completeTask}
-                                                    />
-                                                </div>
+                                                <br/>
                                             </div>
                                         ))}
                                 </div>
