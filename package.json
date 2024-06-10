@@ -9,7 +9,7 @@
     "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
     "start:test": "cross-env NODE_ENV=test node index.js",
-    "prestart": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned"
+    "prestart": "chmod +x node_modules/.bin/nodemon"
   },
   "author": "Satu Härkönen",
   "license": "ISC",
