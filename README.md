@@ -7,7 +7,6 @@ App for creating tasks and monitoring the state of them.
 
 ### User guide
 New users: register by using the form, then log in.
-Current users: log in.
 
 Use form to create tasks. View list of tasks (completed tasks are behind "Completed tasks" button).
 
