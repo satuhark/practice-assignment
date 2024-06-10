@@ -21,6 +21,7 @@ Once a task is marked "completed", it will automatically move under "Completed t
 After 1 hour user is automatically logged out.
 
 ### Hour logging 
+|  | |  |
 | Date | Hours | What was done |
 | 09.04.2024 | 8 | Creating the project idea. Writing a project plan. Creating Github repository. Set up development environment for React. Configure project structure and file organization.|
 | 10.04.2024 | 8 | Initialising frontend components. CSS-styling. Installed dependencies(axios, json-server). Saving data to server. |
