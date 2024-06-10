@@ -8,13 +8,13 @@ App for creating tasks and monitoring the state of them.
 ### User guide
 New users: register by using the form, then log in.
 
-Use form to create tasks. View list of tasks (completed tasks are behind "Completed tasks" button).
+Use the form to create new tasks. View list of current tasks under the form (completed tasks are behind "Completed tasks" button).
 
-Click 'Options' to delete or modify tasks. You can modify the task name, description, deadline and status. You can assign the task to yourself. After modification click "Save".
+Click 'Options' to delete or modify tasks. You can modify the task name, description, deadline and status. You can assign the task only to yourself. After modification click "Save".
 
 You can only complete tasks that are assigned to you. 
 
-Task with closest deadline is first on the list. 
+Task with the closest deadline is first on the list. 
 Red "Overdue" status appears for overdue tasks. 
 Once a task is marked "completed", it will automatically move under "Completed tasks".
 
