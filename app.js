@@ -12,12 +12,10 @@ const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
 mongoose
-  .set('useNewUrlParser', true)
-  .set('useFindAndModify', false)
-  .set('useCreateIndex', true)
   .connect(config.MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true, 
+    useUnifiedTopology: true,
+    useCreateIndex: true
   })
   .then(() => {
     logger.info('connected to MongoDB')
