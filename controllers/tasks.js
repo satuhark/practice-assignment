@@ -63,6 +63,7 @@ tasksRouter.put('/:id', async (req, res) => {
         existingTask.description = body.description || existingTask.description
         existingTask.status = body.status || existingTask.status
         existingTask.deadline = body.deadline || existingTask.deadline
+        existingTask.assignedTo = body.assignedTo || existingTask.assignedTo
         const updatedTask = await existingTask.save()
         res.json(updatedTask)
 })
