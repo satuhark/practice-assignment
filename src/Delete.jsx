@@ -5,20 +5,21 @@ import './index.css'
 
 const baseUrl = 'http://localhost:3001/api/tasks'
 
-const Delete = ({name, id, onDelete }) => {
-    const confirmDeleteTask = () => {
+const Delete = ({name, id, tasks, setTasks }) => {
+    const confirmDeleteTask = async () => {
       if (!id) {
         console.error('No ID provided for deletion.')
         return
     }
         const shouldDelete = window.confirm(`Delete task ${name}?`)
         if (shouldDelete) {
-          onDelete(id)
-          axios
+          await axios
           .delete(`${baseUrl}/${id}`)
           .then(response => {
             console.log('Task deleted successfully:', response.data)
         })
+        const updatedTasks = tasks.filter(task => task.id !== id)
+        setTasks(updatedTasks)
       }
     }
 

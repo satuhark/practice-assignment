@@ -20,7 +20,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, currentUser, ta
     const completeTask = (taskId) => {
         const updatedTasks = tasks.map(task => {
             if (task.id === taskId) {
-                return { ...task, status: "Completed" }
+                return { ...task, status: "ompleted" }
             }
             return task
         })
@@ -32,7 +32,7 @@ const TaskOptions = ({ task, deleteTask, modifyTask, acceptTask, currentUser, ta
                 <button className="options-button" onClick={toggleDropdown}>{buttonText}</button>
                 {isOpen && (
                     <div className="options-dropdown">
-                        <Delete id={task.id} name={task.name} onDelete={deleteTask} />
+                        <Delete id={task.id} name={task.name} onDelete={deleteTask} tasks={tasks} setTasks={setTasks} />
                         <Modify task={task} onModify={modifyTask} user={currentUser} />
                         {(task.status === "To Do" || task.status === "Overdue" || task.status === "Due today") && !task.assignedTo && (<button className="accept-button" onClick={() => acceptTask(task.id.toString())}>Accept Task</button>)}
                         {(task.assignedTo && task.assignedTo === currentUser.name) && (<button className="completed-button" onClick={() => completeTask(task.id.toString())}>Task Completed</button>)}
