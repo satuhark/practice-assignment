@@ -4,21 +4,21 @@
   "description": "Backend for practice assignment",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/cross-env NODE_ENV=production node index.js",
-    "dev": "./node_modules/.bin/cross-env NODE_ENV=development nodemon index.js",
-    "test": "./node_modules/.bin/cross-env NODE_ENV=test node --test",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "test": "cross-env NODE_ENV=test node --test",
     "lint": "eslint .",
-    "start:test": "./node_modules/.bin/cross-env NODE_ENV=test node index.js",
+    "start:test": "cross-env NODE_ENV=test node index.js",
     "prestart": "Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned; ./node_modules/.bin/nodemon"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
     "dotenv": "^10.0.0",
     "express": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.22"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "nodemon": "^3.1.3"
   }
