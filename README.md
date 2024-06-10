@@ -4,15 +4,20 @@
 App for creating tasks and monitoring the state of them. 
 
 ### User guide
-First you see a page with Login and Register. If you don't have a username and password, start by registering and after that log in. 
+New users: register by using the form, then log in.
+Current users: log in.
 
-After logging in you see a form for creating new tasks, and a list of current tasks with their details.
-By clicking 'Options' you can delete or modify the task. You can modify the task name, description, deadline and status. You can assign the task to yourself. After modification click "Save". 
+Use form to create tasks. View list of tasks (completed tasks are behind "Completed tasks" button).
+
+Click 'Options' to delete or modify tasks. You can modify the task name, description, deadline and status. You can assign the task to yourself. After modification click "Save".
+
 You can only complete tasks that are assigned to you. 
 
-Tasks are sorted so that the nearest deadline is first on the list. Red "Overdue" status appears for overdue tasks. Once a task is marked "completed", it will automatically move under "Completed tasks" (find "Completed tasks" behind a button at the end of the task list).
+Task with closest deadline is first on the list. 
+Red "Overdue" status appears for overdue tasks. 
+Once a task is marked "completed", it will automatically move under "Completed tasks".
 
-After 1 hour automatically logged out.
+After 1 hour user is automatically logged out.
 
 ### Hour logging 
 | Date | Hours | What was done |
@@ -48,5 +53,6 @@ After 1 hour automatically logged out.
 | 03.06.2024 | 6 | Fixing backend tests, starting E2E tests. |
 | 04.06.2024 | 6 | E2E tests. |
 | 05.06.2024 | 6 | E2E tests, fixing errors, writing user guide. |
+| 10.06.2024 | 6 | Fixing errors. Production build of frontend. Finding out why deploy on Render does not work. |
 | TOTAL HOURS | 162 | end of 8th week |
 
