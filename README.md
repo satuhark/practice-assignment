@@ -3,7 +3,7 @@
 https://practice-assignment-1.onrender.com
 
 ### Short description of the app
-App for creating tasks and monitoring the state of them. 
+App for creating, saving, deleting and monitoring tasks and the details of them for logged in users.
 
 ### User guide
 New users: register by using the form, then log in.
@@ -22,7 +22,6 @@ After 1 hour user is automatically logged out.
 
 ### Hour logging 
 | Date | Hours | What was done |
-|----------|----------|----------|
 | 09.04.2024 | 8 | Creating the project idea. Writing a project plan. Creating Github repository. Set up development environment for React. Configure project structure and file organization.|
 | 10.04.2024 | 8 | Initialising frontend components. CSS-styling. Installed dependencies(axios, json-server). Saving data to server. |
 | 11.04.2024 | 8 | Initialize backend. Install dependencies. Connecting frontend to backend. |
