@@ -10,7 +10,7 @@ New users: register by using the form, then log in.
 
 Use the form to create new tasks. View list of current tasks under the form (completed tasks are behind "Completed tasks" button).
 
-Click 'Options' to delete or modify tasks. You can modify the task name, description, deadline and status. You can assign the task only to yourself. After modification click "Save".
+Click 'Options' to delete or modify tasks. You can modify the task name, description, deadline and status. After modification click "Save". You can assign the task to yourself, and that means you will be able to complete it. 
 
 You can only complete tasks that are assigned to you. 
 
