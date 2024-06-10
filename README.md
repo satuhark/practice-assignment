@@ -56,5 +56,6 @@ After 1 hour user is automatically logged out.
 | 04.06.2024 | 6 | E2E tests. |
 | 05.06.2024 | 6 | E2E tests, fixing errors, writing user guide. |
 | 10.06.2024 | 8 | Fixing errors. Production build of frontend. Working on Render (deploy did not work), finding solutions. |
+| 9th & 10th week | =26 |  |
 | TOTAL HOURS | 188 h | |
 
