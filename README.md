@@ -1,5 +1,7 @@
 ### Link to the app
 
+https://practice-assignment-1.onrender.com
+
 ### Short description of the app
 App for creating tasks and monitoring the state of them. 
 
@@ -53,6 +55,6 @@ After 1 hour user is automatically logged out.
 | 03.06.2024 | 6 | Fixing backend tests, starting E2E tests. |
 | 04.06.2024 | 6 | E2E tests. |
 | 05.06.2024 | 6 | E2E tests, fixing errors, writing user guide. |
-| 10.06.2024 | 6 | Fixing errors. Production build of frontend. Finding out why deploy on Render does not work. |
-| TOTAL HOURS | 162 | end of 8th week |
+| 10.06.2024 | 8 | Fixing errors. Production build of frontend. Working on Render (deploy did not work), finding solutions. |
+| TOTAL HOURS | 188 h | |
 
