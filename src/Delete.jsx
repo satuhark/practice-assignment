@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 import './index.css'
 
-const baseUrl = 'http://localhost:3001/api/tasks'
+const baseUrl = 'https://practice-assignment-1.onrender.com/api/tasks'
 
 const Delete = ({name, id, tasks, setTasks }) => {
     const confirmDeleteTask = async () => {

@@ -6,7 +6,7 @@ import TaskOptions from './TaskOptions'
 import Login from './Login'
 import Register from './Register'
 
-const baseUrl = 'http://localhost:3001/api/tasks'
+const baseUrl = 'https://practice-assignment-1.onrender.com/api/tasks'
 
 const Add = () => {
     const [tasks, setTasks] = useState([])

@@ -22,7 +22,7 @@ const Register = () => {
         }
         
         try {
-            const response = await axios.post('http://localhost:3001/api/users', {
+            const response = await axios.post('https://practice-assignment-1.onrender.com/api/users', {
                 username,
                 name,
                 password

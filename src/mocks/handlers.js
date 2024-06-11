@@ -3,7 +3,7 @@ import { http } from 'msw'
 console.log('Initializing MSW Handlers')
 
 export const handlers = [
-    http.options('http://localhost:3002/api/tasks', (req, res, ctx) => {
+    http.options('https://practice-assignment-1.onrender.com/api/tasks', (req, res, ctx) => {
         return res(
             ctx.set('Access-Control-Allow-Origin', '*'),
             ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'),
@@ -11,10 +11,10 @@ export const handlers = [
             ctx.status(200)
         )
     }),
-    http.post('http://localhost:3002/api/tasks', (req, res, ctx) => {
+    http.post('https://practice-assignment-1.onrender.com/api/tasks', (req, res, ctx) => {
       return res(ctx.json({ message: 'Mocked response for tasks' }))
     }),
-    http.get('http://localhost:3002/api/tasks', (req, res, ctx) => {
+    http.get('https://practice-assignment-1.onrender.com/api/tasks', (req, res, ctx) => {
         return res(ctx.json({ message: 'Mocked response for GET request to /api/tasks'}))
     })
   ]

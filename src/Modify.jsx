@@ -3,7 +3,7 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/api/tasks'
+const baseUrl = 'https://practice-assignment-1.onrender.com/api/tasks'
 
 const Modify = ({ task, onModify, user, assignedTo }) => {
     const [isEditing, setIsEditing] = useState(false)
