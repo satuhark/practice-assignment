@@ -12,7 +12,7 @@ tasksRouter.get('/', async (req, res) => {
           }
         })
         res.status(200).json(tasks)
-})
+}) 
 
 tasksRouter.get('/:id', async (req, res) => {
     const task = await Task.findById(req.params.id)
